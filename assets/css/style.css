@@ -56,7 +56,6 @@
   --ink-50: rgba(15, 15, 15, .50);
   --ink-18: rgba(15, 15, 15, .18);
   --ink-12: rgba(15, 15, 15, .12);
-  --ink-06: rgba(15, 15, 15, .06);
 
   --ivory-72: rgba(250, 248, 245, .72);
   --ivory-52: rgba(250, 248, 245, .52);
@@ -65,6 +64,7 @@
 
   /* contextual — flipped by .section--dark and .footer */
   --bg: var(--ivory);
+  --fg: var(--ink);
   --fg-soft: var(--ink-60);
   --fg-faint: var(--ink-60);   /* small text — 4.5:1 on ivory */
   --fg-decor: var(--ink-50);   /* display text only — 3.3:1 */
@@ -90,10 +90,12 @@
   --section-y: clamp(4.5rem, 9vw, 10.5rem);
   --nav-h: 4.25rem;
 
-  /* motion */
+  /* motion — fast for micro-interactions, slow and soft for reveals */
   --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
   --fast: .22s;
   --mid: .42s;
+  --slow: .8s;
 }
 
 /* ---------- 2. Reset ---------- */
@@ -119,7 +121,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   font-feature-settings: "cv11" 1, "ss01" 1;
+  text-rendering: optimizeLegibility;
 }
+
+::selection { background: var(--ink); color: var(--ivory); }
+.section--dark ::selection,
+.footer ::selection { background: var(--ivory); color: var(--ink); }
+
+/* figures in labels, numbers and meta should never shift width */
+.label,
+.svc__num,
+.step__num,
+.footer__bottom { font-variant-numeric: tabular-nums; }
 
 img, svg { display: block; max-width: 100%; height: auto; }
 ul, ol { list-style: none; padding: 0; }
@@ -128,10 +141,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 em { font-style: normal; }
 
 :focus-visible {
-  outline: 2px solid currentColor;
+  outline: 1.5px solid currentColor;
   outline-offset: 4px;
   border-radius: 1px;
 }
+.btn:focus-visible { outline-offset: 3px; }
+.inds__tile:focus-visible { outline-offset: -3px; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
@@ -165,6 +180,7 @@ em { font-style: normal; }
 .section--dark,
 .footer {
   --bg: var(--ink);
+  --fg: var(--ivory);
   --fg-soft: var(--ivory-72);
   --fg-faint: var(--ivory-52);  /* small text — 5.4:1 on ink */
   --fg-decor: var(--ivory-42);  /* display text only — 3.7:1 */
@@ -193,9 +209,8 @@ em { font-style: normal; }
   text-wrap: balance;
 }
 
-.prose { color: var(--ink-80); max-width: 46ch; }
+.prose { color: var(--ink-80); max-width: 46ch; text-wrap: pretty; }
 .prose p + p { margin-top: 1.1em; }
-.prose--invert { color: var(--ivory-72); }
 
 .sec-head {
   display: grid;
@@ -210,6 +225,36 @@ em { font-style: normal; }
     align-items: start;
   }
   .sec-head .label { padding-top: .5rem; }
+}
+
+/* ---------- 3b. Masked line reveal ----------
+   Display type rises out of a clipped box. Below 48rem headings wrap to several
+   visual lines, where sliding a whole block reads worse than a fade — so the
+   mask becomes a fade there rather than sliding a two-line slab. */
+.mask { display: block; }
+.mask > span { display: block; }
+
+@media (min-width: 48rem) {
+  .mask {
+    overflow: hidden;
+    padding-block: .08em .2em;
+    margin-block: -.08em -.2em;
+  }
+  .js .mask > span { transform: translateY(calc(100% + .22em)); }
+  .js .mask.is-in > span {
+    transform: none;
+    transition: transform var(--slow) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+@media (max-width: 47.999rem) {
+  .js .mask { opacity: 0; transform: translateY(12px); }
+  .js .mask.is-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity .5s var(--ease), transform .6s var(--ease);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
 }
 
 /* ---------- 4. Buttons ---------- */
@@ -232,21 +277,23 @@ em { font-style: normal; }
   transition: color var(--fast) var(--ease);
   min-height: 3.25rem;
 }
-.btn > span { transition: transform var(--mid) var(--ease); }
+
 .btn::after {
   content: "";
   position: absolute; inset: 0; z-index: -1;
   background: var(--btn-fg);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform var(--mid) var(--ease);
+  transform: translateX(-100.5%);
+  transition: transform .5s var(--ease-out);
 }
 .btn:hover { color: var(--btn-bg); }
-.btn:hover::after { transform: scaleY(1); }
-.btn:hover > span { transform: translateX(.25em); }
+.btn:hover::after,
+.btn:focus-visible::after { transform: translateX(0); }
 .btn--lg { padding: 1.25rem 2rem; font-size: var(--t-body); min-height: 3.75rem; }
 .btn--block { width: 100%; justify-content: center; }
-.btn--invert { --btn-fg: var(--ink); --btn-bg: var(--ivory); }
+
+/* the fill inverts on hover, so the edge has to survive it */
+.btn--primary { border: 1px solid var(--ink); }
+.btn--invert { --btn-fg: var(--ink); --btn-bg: var(--ivory); border: 1px solid var(--ivory); }
 
 .btn--ghost {
   --btn-fg: var(--ink);
@@ -256,8 +303,11 @@ em { font-style: normal; }
   padding-inline: 1.5rem;
 }
 .btn--ghost::after { background: var(--ink); }
-.btn--ghost:hover { color: var(--ivory); border-color: var(--ink); }
-.btn--ghost:hover > span { transform: translateY(.2em); }
+.btn--ghost:hover,
+.btn--ghost:focus-visible { color: var(--ivory); border-color: var(--ink); }
+.btn--ghost:hover .arr--down svg,
+.btn--ghost:focus-visible .arr--down svg { transform: rotate(90deg) translateX(.2em); }
+.btn--ghost .arr--down svg { transition: transform var(--mid) var(--ease-out); }
 
 .link-arrow {
   display: inline-flex; align-items: center; gap: .45em;
@@ -279,6 +329,24 @@ em { font-style: normal; }
 }
 .arr svg { width: 100%; height: auto; overflow: visible; }
 .arr--down svg { transform: rotate(90deg); }
+
+/* two arrows in a clipped box: on hover the resting one leaves to the right as
+   its twin arrives from the left, so the motion reads as travel, not a nudge */
+.arrbox {
+  display: flex;
+  overflow: hidden;
+  width: .875em;
+  flex: 0 0 auto;
+}
+.arrbox > i {
+  flex: 0 0 100%;
+  display: flex;
+  transform: translateX(-100%);
+  transition: transform var(--mid) var(--ease-out);
+}
+.arrbox .arr { width: 100%; }
+:is(.btn, .nav__cta, .link-arrow):hover .arrbox > i,
+:is(.btn, .nav__cta, .link-arrow):focus-visible .arrbox > i { transform: translateX(0); }
 
 /* ---------- 4b. Drawn marks ----------
    One hairline language for every graphic on the page. `stroke-width` is inherited,
@@ -319,6 +387,18 @@ em { font-style: normal; }
 .gapfig .fig-dash { stroke: var(--fg-decor); stroke-dasharray: 4 4; }
 .ticket__fig svg [fill="currentColor"] { stroke: none; }
 
+/* ---------- 4c. Text swap ---------- */
+.swap { display: grid; overflow: hidden; }
+.swap > span {
+  grid-area: 1 / 1;
+  transition: transform var(--mid) var(--ease-out);
+}
+.swap > span:last-child { transform: translateY(105%); }
+a:hover .swap > span:first-child,
+a:focus-visible .swap > span:first-child { transform: translateY(-105%); }
+a:hover .swap > span:last-child,
+a:focus-visible .swap > span:last-child { transform: translateY(0); }
+
 /* ---------- 5. Navigation ---------- */
 .nav {
   position: fixed; inset: 0 0 auto; z-index: 100;
@@ -331,7 +411,10 @@ em { font-style: normal; }
 .nav__inner {
   display: flex; align-items: center; gap: clamp(1rem, 3vw, 3rem);
   min-height: var(--nav-h);
+  transition: min-height var(--mid) var(--ease-out);
 }
+.nav.is-stuck .nav__inner { min-height: 3.5rem; }
+
 
 .nav__brand {
   display: inline-flex; align-items: center; gap: .625rem;
@@ -355,14 +438,8 @@ em { font-style: normal; }
   transition: color var(--fast) var(--ease);
   padding-block: .5rem;
 }
-.nav__links a::after {
-  content: ""; position: absolute; left: 0; bottom: 0;
-  width: 100%; height: 1px; background: currentColor;
-  transform: scaleX(0); transform-origin: left;
-  transition: transform var(--mid) var(--ease);
-}
-.nav__links a:hover { color: var(--ink); }
-.nav__links a:hover::after { transform: scaleX(1); }
+.nav__links a:hover,
+.nav__links a:focus-visible { color: var(--ink); }
 
 .nav__cta {
   display: none;
@@ -372,8 +449,7 @@ em { font-style: normal; }
   font-weight: 500;
   padding: .625rem 0;
 }
-.nav__cta .arr { width: .8125rem; transition: transform var(--mid) var(--ease); }
-.nav__cta:hover .arr { transform: translateX(.3em); }
+.nav__cta .arrbox { width: .8125rem; }
 
 .nav__toggle {
   display: inline-flex; align-items: center; gap: .625rem;
@@ -427,7 +503,41 @@ em { font-style: normal; }
   transition: opacity .4s var(--ease), transform .5s var(--ease);
   transition-delay: calc(var(--i, 0) * 55ms + 60ms);
 }
-body.is-locked { overflow: hidden; }
+/* locking scroll removes the scrollbar; --sbw (set in JS) holds the layout still */
+body.is-locked { overflow: hidden; padding-right: var(--sbw, 0px); }
+body.is-locked .nav { padding-right: var(--sbw, 0px); }
+
+/* ---------- 6b. Structure ----------
+   Two hairlines run the height of the page, just outside the content column —
+   the frame the brand is named for, and the grid every section is measured against.
+   They sit inside each section so they pick up that section's own rule colour. */
+@media (min-width: 62rem) {
+  .hero,
+  .section,
+  .footer { position: relative; }
+
+  .hero::before, .hero::after,
+  .section::before, .section::after,
+  .footer::before, .footer::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--rule);
+    opacity: .6;
+    pointer-events: none;
+  }
+  .hero::before,
+  .section::before,
+  .footer::before {
+    left: calc(max(var(--gutter), 50% - var(--shell) / 2 + var(--gutter)) - var(--gutter) / 2);
+  }
+  .hero::after,
+  .section::after,
+  .footer::after {
+    right: calc(max(var(--gutter), 50% - var(--shell) / 2 + var(--gutter)) - var(--gutter) / 2);
+  }
+}
 
 /* ---------- 7. Hero ---------- */
 .hero {
@@ -445,10 +555,15 @@ body.is-locked { overflow: hidden; }
   position: absolute; width: 1.25rem; height: 1.25rem;
   border: 1px solid var(--ink-18);
 }
-.hero__frame i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-.hero__frame i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
-.hero__frame i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
-.hero__frame i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+.hero__frame i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; transform-origin: 0 0; }
+.hero__frame i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; transform-origin: 100% 0; }
+.hero__frame i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; transform-origin: 0 100%; }
+.hero__frame i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; transform-origin: 100% 100%; }
+
+/* the brackets draw outward from their own corners as the page opens — the
+   brand mark, performed once. Neutralised by the reduced-motion block below. */
+@keyframes nf-tick { from { transform: scale(.25); } to { transform: scale(1); } }
+.js .hero__frame i { animation: nf-tick .6s var(--ease-out) .12s both; }
 
 .hero__label {
   display: flex; align-items: center; gap: .875rem; flex-wrap: wrap;
@@ -472,15 +587,6 @@ body.is-locked { overflow: hidden; }
   letter-spacing: -.045em;
   margin-bottom: clamp(2.5rem, 6vw, 5rem);
 }
-/* The mask that the line reveal slides out of. Padding widens the clip box to
-   fit ascenders and descenders; the negative margin keeps the layout identical. */
-.hero__title .line {
-  display: block;
-  overflow: hidden;
-  padding-block: .08em .2em;
-  margin-block: -.08em -.2em;
-}
-.hero__title .line > span { display: block; }
 .hero__title .line--indent { padding-left: 0; }
 @media (min-width: 48rem) {
   .hero__title .line--indent { padding-left: 8.5%; }
@@ -592,9 +698,10 @@ body.is-locked { overflow: hidden; }
   .svc__item:hover .svc__link { padding-inline: clamp(.5rem, 1.4vw, 1.5rem); }
   .svc__item:hover .svc__arrow { transform: translateX(.4rem); color: var(--ink); }
 }
-.svc__item { transition: background-color var(--mid) var(--ease); }
-.svc__item:hover { background: var(--ink-06); }
-.svc__item:hover .svc__title { letter-spacing: -.032em; }
+.svc__item { transition: border-color var(--mid) var(--ease); }
+.svc__item:hover { border-bottom-color: var(--ink); }
+.svc__item:hover .svc__desc { color: var(--ink-80); }
+.svc__desc { transition: color var(--fast) var(--ease); }
 .svc__title { transition: letter-spacing var(--mid) var(--ease); }
 
 /* ---------- 10. Ticket to Scale ---------- */
@@ -642,7 +749,6 @@ body.is-locked { overflow: hidden; }
   background: var(--bg);
   padding: clamp(1.75rem, 3.5vw, 2.75rem) 0;
   padding-right: clamp(1rem, 3vw, 3rem);
-  transition: background-color var(--mid) var(--ease);
 }
 .principle__mark { --s: 44; color: var(--fg); }
 .principle__title {
@@ -665,7 +771,6 @@ body.is-locked { overflow: hidden; }
   .principle:nth-child(odd) { padding-left: clamp(1rem, 2vw, 2rem); }
   .principle:first-child { padding-left: 0; }
 }
-.principle:hover { background: var(--ink-06); }
 
 /* ---------- 12. Industries ---------- */
 .inds {
@@ -688,9 +793,13 @@ body.is-locked { overflow: hidden; }
   color: var(--fg-soft);
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
-.inds__icon { --s: 34; color: var(--fg-soft); transition: color var(--fast) var(--ease); }
+.inds__icon {
+  --s: 34;
+  color: var(--fg-soft);
+  transition: color var(--fast) var(--ease), transform var(--mid) var(--ease-out);
+}
 .inds__tile:hover { background: var(--ivory); color: var(--ink); }
-.inds__tile:hover .inds__icon { color: var(--ink); }
+.inds__tile:hover .inds__icon { color: var(--ink); transform: translateY(-3px); }
 @media (min-width: 30rem) { .inds { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 48rem) { .inds { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (min-width: 75rem) { .inds { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
@@ -801,7 +910,7 @@ body.is-locked { overflow: hidden; }
   padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
   border-top: 1px solid var(--ink-12);
 }
-.founder__rule .arr { width: .8125rem; }
+.founder__rule .arrbox { width: .8125rem; }
 
 /* ---------- 15. Final CTA ---------- */
 .cta { padding-block: clamp(5rem, 12vw, 13rem); }
@@ -880,38 +989,37 @@ body.is-locked { overflow: hidden; }
 .js .reveal.is-in {
   opacity: 1;
   transform: none;
-  transition: opacity .5s var(--ease), transform .62s var(--ease);
-  transition-delay: calc(var(--i, 0) * 40ms);
+  transition: opacity .55s var(--ease), transform .68s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 45ms);
 }
-.js .hero__title .line > span { transform: translateY(calc(100% + .22em)); opacity: 1; }
-.js .hero__title .line.is-in > span {
-  transform: none;
-  transition: transform .8s var(--ease);
-}
-.js .hero__title .line { opacity: 1; transform: none; }
-.js .hero__title .line.reveal { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .js .reveal,
   .js .reveal.is-in,
-  .js .hero__title .line > span,
+  .js .mask,
+  .js .mask.is-in,
+  .js .mask > span,
   .js .menu__list li,
   .js .menu__foot {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
-  .btn::after { transition: none; }
-  .steps::after { transition: none; }
+  .btn::after,
+  .steps::after,
+  .arrbox > i,
+  .swap > span,
+  .nav__inner { transition: none; }
+  .arrbox > i { transform: translateX(-100%); }
+  .swap > span:last-child { display: none; }
   * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
 @media (hover: none) {
-  .svc__item:hover { background: transparent; }
+  .svc__item:hover { border-bottom-color: var(--rule); }
   .inds__tile:hover { background: var(--bg); color: var(--fg-soft); }
-  .inds__tile:hover .inds__icon { color: var(--fg-soft); }
-  .principle:hover { background: var(--bg); }
-  .btn:hover::after { transform: scaleY(0); }
+  .inds__tile:hover .inds__icon { color: var(--fg-soft); transform: none; }
+  .btn:hover::after { transform: translateX(-100.5%); }
   .btn:hover { color: var(--btn-fg); }
 }
 

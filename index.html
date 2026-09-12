@@ -125,13 +125,13 @@
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#approach">Approach</a>
-      <a href="#about">About</a>
+      <a href="#work"><span class="swap"><span>Work</span><span aria-hidden="true">Work</span></span></a>
+      <a href="#services"><span class="swap"><span>Services</span><span aria-hidden="true">Services</span></span></a>
+      <a href="#approach"><span class="swap"><span>Approach</span><span aria-hidden="true">Approach</span></span></a>
+      <a href="#about"><span class="swap"><span>About</span><span aria-hidden="true">About</span></span></a>
     </nav>
 
-    <a class="nav__cta" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
+    <a class="nav__cta" href="#contact"><span class="swap"><span>Start a conversation</span><span aria-hidden="true">Start a conversation</span></span> <span class="arrbox" aria-hidden="true"><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i></span></a>
 
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span class="nav__toggle-label">Menu</span>
@@ -149,7 +149,7 @@
       <li style="--i:3"><a href="#about"><svg class="icon menu__icon" aria-hidden="true" focusable="false"><use href="#i-clarity"></use></svg> About</a></li>
     </ul>
     <div class="menu__foot" style="--i:4">
-      <a class="btn btn--primary btn--block" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
+      <a class="btn btn--primary btn--block" href="#contact">Start a conversation <span class="arrbox" aria-hidden="true"><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i></span></a>
     </div>
   </nav>
 </div>
@@ -162,27 +162,27 @@
     <div class="shell hero__shell">
       <div class="hero__frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-      <p class="label hero__label reveal">
+      <p class="label hero__label reveal" style="--i:0">
         <span>North Frame</span>
         <span class="label__rule" aria-hidden="true"></span>
         <span>Hospitality</span>
       </p>
 
       <h1 class="hero__title" id="hero-title">
-        <span class="line reveal"><span>Digital growth,</span></span>
-        <span class="line line--indent reveal"><span>framed properly.</span></span>
+        <span class="line mask" style="--i:1"><span>Digital growth,</span></span>
+        <span class="line line--indent mask" style="--i:2"><span>framed properly.</span></span>
       </h1>
 
       <div class="hero__foot">
-        <p class="hero__lede reveal">Websites, social strategy and paid growth for hospitality
+        <p class="hero__lede reveal" style="--i:4">Websites, social strategy and paid growth for hospitality
           businesses — built as one system.</p>
-        <div class="hero__actions reveal">
+        <div class="hero__actions reveal" style="--i:3">
           <a class="btn btn--primary" href="#contact">Start a conversation</a>
           <a class="btn btn--ghost" href="#services">Explore what we do <span class="arr arr--down" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
         </div>
       </div>
 
-      <ul class="hero__rail reveal">
+      <ul class="hero__rail reveal" style="--i:5">
         <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg><span>Websites</span></li>
         <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg><span>Social</span></li>
         <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg><span>Paid growth</span></li>
@@ -196,9 +196,7 @@
     <div class="shell">
       <div class="sec-head">
         <p class="label reveal">01 — The gap</p>
-        <h2 class="h-display reveal" id="positioning-title">
-          Good businesses deserve<br>a better digital presence.
-        </h2>
+        <h2 class="h-display" id="positioning-title"><span class="mask" style="--i:0"><span>Good businesses deserve</span></span><span class="mask" style="--i:1"><span>a better digital presence.</span></span></h2>
       </div>
 
       <div class="gapfig">
@@ -251,7 +249,7 @@
     <div class="shell">
       <div class="sec-head sec-head--split">
         <p class="label reveal">02 — Services</p>
-        <h2 class="h-display reveal" id="services-title">Everything your<br>digital presence needs.</h2>
+        <h2 class="h-display" id="services-title"><span class="mask" style="--i:0"><span>Everything your</span></span><span class="mask" style="--i:1"><span>digital presence needs.</span></span></h2>
       </div>
 
       <ol class="svc">
@@ -291,7 +289,7 @@
     <div class="shell">
       <p class="label reveal">03 — The offer</p>
 
-      <h2 class="ticket__title reveal" id="ticket-title">The <em>Ticket</em><br>to Scale</h2>
+      <h2 class="ticket__title" id="ticket-title"><span class="mask" style="--i:0"><span>The <em>Ticket</em></span></span><span class="mask" style="--i:1"><span>to Scale</span></span></h2>
 
       <div class="ticket__figs">
         <figure class="ticket__fig reveal">
@@ -330,7 +328,7 @@
     <div class="shell">
       <div class="sec-head">
         <p class="label reveal">04 — Why North Frame</p>
-        <h2 class="h-display reveal" id="why-title">Built around the business,<br>not a template.</h2>
+        <h2 class="h-display" id="why-title"><span class="mask" style="--i:0"><span>Built around the business,</span></span><span class="mask" style="--i:1"><span>not a template.</span></span></h2>
       </div>
 
       <div class="principles">
@@ -363,7 +361,7 @@
     <div class="shell">
       <div class="sec-head sec-head--split">
         <p class="label reveal">05 — Industries</p>
-        <h2 class="h-display reveal" id="industries-title">Made for<br>hospitality.</h2>
+        <h2 class="h-display" id="industries-title"><span class="mask" style="--i:0"><span>Made for</span></span><span class="mask" style="--i:1"><span>hospitality.</span></span></h2>
       </div>
 
       <ul class="inds">
@@ -388,7 +386,7 @@
     <div class="shell">
       <div class="sec-head">
         <p class="label reveal">06 — Approach</p>
-        <h2 class="h-display reveal" id="approach-title">Four steps,<br>one direction.</h2>
+        <h2 class="h-display" id="approach-title"><span class="mask" style="--i:0"><span>Four steps,</span></span><span class="mask" style="--i:1"><span>one direction.</span></span></h2>
       </div>
 
       <ol class="steps">
@@ -444,7 +442,7 @@
     <div class="shell">
       <div class="sec-head">
         <p class="label reveal">07 — About</p>
-        <h2 class="h-display reveal" id="founder-title">Built with intention.</h2>
+        <h2 class="h-display" id="founder-title"><span class="mask" style="--i:0"><span>Built with intention.</span></span></h2>
       </div>
 
       <div class="founder__body">
@@ -464,7 +462,7 @@
               four disconnected services pulling different ways.</p>
           </div>
           <p class="founder__rule reveal">
-            <a class="link-arrow" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
+            <a class="link-arrow" href="#contact">Start a conversation <span class="arrbox" aria-hidden="true"><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i></span></a>
           </p>
         </div>
       </div>
@@ -475,14 +473,11 @@
   <section class="section section--dark cta" id="contact" aria-labelledby="cta-title">
     <div class="shell cta__shell">
       <p class="label reveal">08 — Start here</p>
-      <h2 class="cta__title reveal" id="cta-title">
-        Your business<br>has a direction.<br>
-        <em>Let’s frame it properly.</em>
-      </h2>
+      <h2 class="cta__title" id="cta-title"><span class="mask" style="--i:0"><span>Your business</span></span><span class="mask" style="--i:1"><span>has a direction.</span></span><span class="mask" style="--i:2"><span><em>Let’s frame it properly.</em></span></span></h2>
       <p class="cta__lede reveal">Tell us where your business is today and where you want to take it.</p>
       <p class="cta__action reveal">
         <a class="btn btn--invert btn--lg" href="mailto:hello@northframe.co?subject=Starting%20a%20conversation%20with%20North%20Frame">
-          Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
+          Start a conversation <span class="arrbox" aria-hidden="true"><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i></span>
         </a>
       </p>
     </div>
@@ -514,7 +509,7 @@
       <div class="footer__founder">
         <p class="label">Founder</p>
         <p class="footer__person">Youssef Cherif</p>
-        <a class="link-arrow" href="mailto:hello@northframe.co">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
+        <a class="link-arrow" href="mailto:hello@northframe.co">Start a conversation <span class="arrbox" aria-hidden="true"><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i><i><span class="arr"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></i></span></a>
       </div>
     </div>
 

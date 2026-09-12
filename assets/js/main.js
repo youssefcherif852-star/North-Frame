@@ -5,7 +5,7 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- 1. Sticky nav state ---------------------------------------- */
+  /* ---- 1. Sticky nav state + scroll progress ---------------------- */
   var nav = document.querySelector('[data-nav]');
   var lastStuck = null;
 
@@ -24,6 +24,11 @@
 
   function setMenu(open) {
     if (!menu || !toggle) return;
+    if (open) {
+      // hiding the scrollbar would shift the page; reserve exactly its width
+      var sbw = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty('--sbw', Math.max(0, sbw) + 'px');
+    }
     toggle.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
     document.body.classList.toggle('is-locked', open);
@@ -64,13 +69,18 @@
   if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
   else if (desktop.addListener) desktop.addListener(onBreakpoint);
 
-  /* ---- 3. Scroll reveals ----------------------------------------- */
-  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  /* ---- 3. Reveals ------------------------------------------------
+     Two kinds: .reveal fades up, .mask slides display type out of a clipped
+     box. Both are driven by one observer and one stagger rule. */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal, .mask'));
+
+  function showAll() { reveals.forEach(function (el) { el.classList.add('is-in'); }); }
 
   if (reduced || !('IntersectionObserver' in window)) {
-    reveals.forEach(function (el) { el.classList.add('is-in'); });
+    showAll();
   } else {
-    // Stagger siblings that share a parent, so groups arrive as a set.
+    // Siblings sharing a parent arrive as a set, unless the markup sets its own
+    // order (the hero is choreographed by hand).
     var groups = new Map();
     reveals.forEach(function (el) {
       if (el.style.getPropertyValue('--i')) return;
@@ -88,7 +98,18 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
-    reveals.forEach(function (el) { io.observe(el); });
+    // Hold the first frame until the display face is ready, so the opening
+    // reveal never animates in the fallback font and then reflow mid-motion.
+    var start = function () { reveals.forEach(function (el) { io.observe(el); }); };
+    var fonts = document.fonts && document.fonts.ready;
+    if (fonts && typeof Promise !== 'undefined') {
+      var armed = false;
+      var once = function () { if (!armed) { armed = true; start(); } };
+      fonts.then(once);
+      setTimeout(once, 600);   // never wait on a font that failed to load
+    } else {
+      start();
+    }
   }
 
   /* ---- 4. Approach progress rule --------------------------------- */

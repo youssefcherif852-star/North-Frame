@@ -42,10 +42,17 @@ Two colours, and opacity for everything else.
 | `--ink` | `#0F0F0F` | Text, dark sections, primary buttons |
 | `--ivory` | `#FAF8F5` | Page ground, inverted text |
 
-Hierarchy comes from opacity steps (`--ink-80` → `--ink-06`, `--ivory-72` →
-`--ivory-10`), hairline rules, and type scale — not from accent colours. Dark
-sections set `--bg` / `--fg` / `--rule` on `.section--dark`, so components inside
-them invert without duplicated rules.
+Hierarchy comes from opacity steps, hairline rules, and type scale — not from
+accent colours. Dark sections and the footer re-declare `--bg` / `--fg` /
+`--fg-soft` / `--fg-faint` / `--fg-decor` / `--rule`, so every component inside
+them inverts without a duplicated rule.
+
+Above 62rem two hairlines run the full height of the page, half a gutter outside
+the content column — the frame the brand is named for, and the grid every section
+is measured against. They live inside each section rather than in one fixed
+overlay, so they pick up that section's own rule colour; the ten blocks
+(hero, eight sections, footer) are contiguous to the pixel, so the lines are
+unbroken.
 
 Type: **Inter Tight** for display (tight tracking, editorial), **Inter** for body
 and labels — both self-hosted as variable woff2, so there is no third-party
@@ -54,10 +61,29 @@ is a `clamp()` in `:root`, so the scale is fluid rather than stepped at
 breakpoints. Arrows are drawn, not typed: Inter's Latin subsets have no U+2192, so
 a `→` in text would silently render in a fallback face.
 
-Motion is deliberately small: a masked line reveal in the hero, a 14px fade-up on
-section entry, a scroll-linked rule in the Approach section, and hover
-micro-interactions. All of it is disabled under `prefers-reduced-motion`, and the
-page is fully legible with JavaScript off (reveal states only apply under `html.js`).
+## Motion
+
+Two reveal primitives, one observer, one rAF-throttled scroll handler.
+
+- `.mask` slides display type out of a clipped box. Every heading on the page uses
+  it. Below 48rem headings wrap to several visual lines, where sliding a two-line
+  slab reads worse than a fade — so the mask becomes a fade at that width instead.
+- `.reveal` is a 14px fade-up for everything else, staggered by `--i` across
+  siblings.
+- The hero is choreographed by hand (`--i` 0→5: label, both headline lines,
+  buttons, lede, rail) and held until `document.fonts.ready`, with a 600ms
+  timeout, so the opening reveal never animates in the fallback face and reflow
+  mid-motion.
+- The four hero brackets scale outward from their own corners as the page opens —
+  the brand mark, performed once.
+- Micro-interactions are fast (.22–.42s) and reveals are slow (.8s) on
+  `cubic-bezier(.16, 1, .3, 1)`. That contrast is the point.
+- Hover: nav labels swap on a masked vertical slide, button arrows leave to the
+  right as their twin arrives from the left, filled buttons wipe to their inverse,
+  service rows answer by darkening their own hairline rather than filling with grey.
+
+All of it is disabled under `prefers-reduced-motion`, and the page is fully legible
+with JavaScript off (reveal states only apply under `html.js`).
 
 ## Drawn, not written
 
@@ -132,7 +158,28 @@ checked against its real rendered background at 375 / 390 / 430 / 768 / 1024 /
 
 ## Verified
 
-- 7 breakpoints: no horizontal overflow, no contrast failures, no console errors
-- Mobile menu: opens, locks scroll, closes on Escape and on link tap, returns focus
-- `prefers-reduced-motion`: all content visible, no transitions
-- JavaScript disabled: all content visible (reveal states are scoped to `html.js`)
+Driven in real Chromium, not eyeballed. At 320 / 360 / 375 / 390 / 414 / 430 / 600
+/ 768 / 834 / 1024 / 1280 / 1440 / 1680 / 1920 / 2560px:
+
+- no element crosses the viewport edge
+- no text node fails WCAG AA against its **real rendered** background
+- no mask still clips its line after revealing
+- nothing is left unrevealed after a full scroll
+- no console error, page error, or failed request
+- every in-page anchor lands clear of the fixed nav
+- no undefined CSS custom property, no rule for markup that no longer exists,
+  no duplicate `id`
+
+Plus: the mobile menu opens, locks scroll without shifting the page, closes on
+Escape and on link tap and returns focus; `prefers-reduced-motion` leaves every
+element visible and un-animated; with JavaScript disabled the whole page renders.
+
+Bugs this caught and fixed, rather than shipped:
+
+| Symptom | Cause |
+| --- | --- |
+| Service row arrows rendered as solid black triangles | an `<svg>` with no `fill`/`stroke` set |
+| An ivory stripe down the right edge of every dark section | `scrollbar-gutter: stable` reserved 15px the full-bleed sections never painted into |
+| The primary button dissolved into the page on hover | inverting a filled button that had no border |
+| The nav's bottom border looked half-broken | a scroll-progress hairline overwriting part of it (removed — it read as a utility bar) |
+| Three icon `color` declarations silently inherited | `var(--fg)` had been dropped as "unused", making them invalid at computed-value time |
