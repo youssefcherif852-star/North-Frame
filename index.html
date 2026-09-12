@@ -33,14 +33,93 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-
 <a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+  <!-- Disciplines -->
+  <symbol id="i-web" viewBox="0 0 24 24">
+    <path d="M2.5 4.5h19v15h-19z"/><path d="M2.5 8.5h19"/>
+    <path d="M5 6.5h.01M7.5 6.5h.01"/><path d="M2.5 19.5 14 8.5"/>
+  </symbol>
+  <symbol id="i-social" viewBox="0 0 24 24">
+    <path d="M2.5 2.5h19v19h-19z"/><path d="M9 2.5v19M15 2.5v19M2.5 9h19M2.5 15h19"/>
+    <path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-growth" viewBox="0 0 24 24">
+    <path d="M2.5 20.5h19"/><path d="M4 16.5l5-5 4 3 6.5-8.5"/><path d="M15.5 7h4.5v4.5"/>
+  </symbol>
+  <symbol id="i-system" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3"/><path d="M12 2.5V9m0 6v6.5M2.5 12H9m6 0h6.5"/>
+    <path d="M12 2.5h.01M12 21.5h.01M2.5 12h.01M21.5 12h.01"/>
+  </symbol>
+  <!-- Hospitality -->
+  <symbol id="i-cafe" viewBox="0 0 24 24">
+    <path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/>
+    <path d="M16 10h2.5a2 2 0 0 1 0 4H16"/><path d="M3 21h15"/>
+  </symbol>
+  <symbol id="i-restaurant" viewBox="0 0 24 24">
+    <path d="M6.5 3v5.5a2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5V3"/>
+    <path d="M9 11v10M9 3v5.5"/><path d="M16 3l2.5 3.5V14H16z"/><path d="M17.2 14v7"/>
+  </symbol>
+  <symbol id="i-pizzeria" viewBox="0 0 24 24">
+    <path d="M3.5 8q8.5-4 17 0L12 20.5z"/><path d="M6 10.6q6-2.6 12 0"/>
+    <circle cx="10" cy="12.6" r="1.1"/><circle cx="14.2" cy="12.3" r="1.1"/><circle cx="12" cy="16.2" r="1.1"/>
+  </symbol>
+  <symbol id="i-bakery" viewBox="0 0 24 24">
+    <path d="M3.5 12a8.5 5.5 0 0 1 17 0v6h-17z"/><path d="M8.5 9.5 7 13m5-3.4L10.5 13m5-3L14 13"/>
+  </symbol>
+  <symbol id="i-patisserie" viewBox="0 0 24 24">
+    <path d="M4 20.5h16v-4H4z"/><path d="M5.5 16.5h13v-4h-13z"/><path d="M7 12.5h10V9H7z"/>
+    <circle cx="12" cy="6.9" r="1.5"/>
+  </symbol>
+  <symbol id="i-hotel" viewBox="0 0 24 24">
+    <path d="M4 3.5h16v17H4z"/><path d="M7.5 7.5h2.5M14 7.5h2.5M7.5 12h2.5M14 12h2.5"/>
+    <path d="M10 20.5v-4h4v4"/>
+  </symbol>
+  <symbol id="i-boutique" viewBox="0 0 24 24">
+    <circle cx="7" cy="12" r="4"/><path d="M11 12h10"/><path d="M17 12v3.5m3-3.5v3.5"/>
+  </symbol>
+  <symbol id="i-lounge" viewBox="0 0 24 24">
+    <path d="M4 5h16l-8 8.5z"/><path d="M12 13.5V19"/><path d="M8 19h8"/><circle cx="9.4" cy="8" r="1.1"/>
+  </symbol>
+  <symbol id="i-rooftop" viewBox="0 0 24 24">
+    <path d="M5 20.5V17h14v3.5"/><path d="M2.5 17h19"/>
+    <path d="M12 17V7"/><path d="M5 7.5q7-5.5 14 0"/>
+  </symbol>
+  <symbol id="i-fastfood" viewBox="0 0 24 24">
+    <path d="M4.5 9.5a7.5 4.5 0 0 1 15 0z"/><path d="M4 12.5h16"/>
+    <path d="M4.5 15.5h15v1a3 3 0 0 1-3 3H7.5a3 3 0 0 1-3-3z"/>
+  </symbol>
+  <symbol id="i-sushi" viewBox="0 0 24 24">
+    <circle cx="8.5" cy="12.5" r="5"/><circle cx="8.5" cy="12.5" r="2"/>
+    <circle cx="17" cy="12.5" r="5"/><circle cx="17" cy="12.5" r="2"/><path d="M2.5 20.5h19"/>
+  </symbol>
+  <symbol id="i-dessert" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4.5"/><path d="M7.8 11 12 21l4.2-10"/>
+  </symbol>
+  <!-- Principles -->
+  <symbol id="i-clarity" viewBox="0 0 24 24">
+    <path d="M2.5 5.5h19v13h-19z"/>
+    <circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-positioning" viewBox="0 0 24 24">
+    <path d="M2.5 12h19"/><path d="M7.5 4.5h9V10h-9z"/><path d="M7.5 14h9v5.5h-9z"/>
+  </symbol>
+  <symbol id="i-conversion" viewBox="0 0 24 24">
+    <path d="M2.5 12h11"/><path d="M10.5 8.5 14 12l-3.5 3.5"/><path d="M18 4.5v15"/>
+  </symbol>
+  <symbol id="i-direction" viewBox="0 0 24 24">
+    <path d="M3 5.5h12m0 0-2.8-2.8M15 5.5l-2.8 2.8"/>
+    <path d="M3 12h12m0 0-2.8-2.8M15 12l-2.8 2.8"/>
+    <path d="M3 18.5h12m0 0-2.8-2.8M15 18.5l-2.8 2.8"/>
+  </symbol>
+</svg>
 
 <header class="nav" id="site-nav" data-nav>
   <div class="nav__inner shell">
     <a class="nav__brand" href="#top" aria-label="North Frame — home">
       <span class="nav__mark" aria-hidden="true">
-        <svg viewBox="0 0 16 16" focusable="false"><path d="M1 15V1h14v14" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1 15 15 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <svg viewBox="0 0 16 16" focusable="false"><path d="M1 15V1h14v14"/><path d="M1 15 15 1"/></svg>
       </span>
       <span class="nav__wordmark">North&nbsp;Frame</span>
     </a>
@@ -52,7 +131,7 @@
       <a href="#about">About</a>
     </nav>
 
-    <a class="nav__cta" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span></a>
+    <a class="nav__cta" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
 
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span class="nav__toggle-label">Menu</span>
@@ -64,14 +143,13 @@
 <div class="menu" id="mobile-menu" hidden data-menu>
   <nav class="menu__inner shell" aria-label="Mobile">
     <ul class="menu__list">
-      <li style="--i:0"><a href="#work"><span class="menu__num">01</span> Work</a></li>
-      <li style="--i:1"><a href="#services"><span class="menu__num">02</span> Services</a></li>
-      <li style="--i:2"><a href="#approach"><span class="menu__num">03</span> Approach</a></li>
-      <li style="--i:3"><a href="#about"><span class="menu__num">04</span> About</a></li>
+      <li style="--i:0"><a href="#work"><svg class="icon menu__icon" aria-hidden="true" focusable="false"><use href="#i-system"></use></svg> Work</a></li>
+      <li style="--i:1"><a href="#services"><svg class="icon menu__icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg> Services</a></li>
+      <li style="--i:2"><a href="#approach"><svg class="icon menu__icon" aria-hidden="true" focusable="false"><use href="#i-direction"></use></svg> Approach</a></li>
+      <li style="--i:3"><a href="#about"><svg class="icon menu__icon" aria-hidden="true" focusable="false"><use href="#i-clarity"></use></svg> About</a></li>
     </ul>
     <div class="menu__foot" style="--i:4">
-      <a class="btn btn--primary btn--block" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span></a>
-      <p class="menu__note">Digital growth partner for hospitality businesses.</p>
+      <a class="btn btn--primary btn--block" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
     </div>
   </nav>
 </div>
@@ -87,7 +165,7 @@
       <p class="label hero__label reveal">
         <span>North Frame</span>
         <span class="label__rule" aria-hidden="true"></span>
-        <span>Digital growth partner · Hospitality</span>
+        <span>Hospitality</span>
       </p>
 
       <h1 class="hero__title" id="hero-title">
@@ -96,26 +174,24 @@
       </h1>
 
       <div class="hero__foot">
-        <p class="hero__lede reveal">
-          North Frame helps hospitality businesses build a stronger digital presence
-          through premium websites, strategic marketing and growth-focused systems.
-        </p>
+        <p class="hero__lede reveal">Websites, social strategy and paid growth for hospitality
+          businesses — built as one system.</p>
         <div class="hero__actions reveal">
           <a class="btn btn--primary" href="#contact">Start a conversation</a>
-          <a class="btn btn--ghost" href="#services">Explore what we do <span class="arr arr--down" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span></a>
+          <a class="btn btn--ghost" href="#services">Explore what we do <span class="arr arr--down" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
         </div>
       </div>
 
       <ul class="hero__rail reveal">
-        <li><span class="hero__rail-num">01</span> Websites</li>
-        <li><span class="hero__rail-num">02</span> Social strategy</li>
-        <li><span class="hero__rail-num">03</span> Meta advertising</li>
-        <li><span class="hero__rail-num">04</span> Growth systems</li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg><span>Websites</span></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg><span>Social</span></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg><span>Paid growth</span></li>
+        <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-system"></use></svg><span>Systems</span></li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ POSITIONING ============ -->
+  <!-- ============ THE GAP ============ -->
   <section class="section positioning" aria-labelledby="positioning-title">
     <div class="shell">
       <div class="sec-head">
@@ -125,33 +201,48 @@
         </h2>
       </div>
 
-      <div class="positioning__body">
-        <div class="prose reveal">
-          <p>You have spent years on the details. The menu, the room, the light at seven in the
-            evening, the way people feel when they walk in. Most hospitality businesses get
-            that part right.</p>
-          <p>Then someone finds you on a phone, and none of it comes through. A slow page. A
-            scattered feed. Photographs from two concepts ago. A booking link that leads nowhere.</p>
-          <p>The business is not the problem. The way it is presented is. North Frame exists to
-            close that distance — so the digital side of the business feels as considered as the
-            business itself.</p>
-        </div>
+      <div class="gapfig">
+        <figure class="gapfig__panel reveal">
+          <svg viewBox="0 0 260 190" role="img" aria-label="A composed still life — a plate, a cup and saucer, a glass — all sitting on one table line inside a complete frame.">
+            <path d="M.75.75h258.5v188.5H.75z" class="fig-frame"/>
+            <path d="M14 28V14h14M232 14h14v14M14 162v14h14M246 162v14h-14" class="fig-tick"/>
+            <path d="M24 132h212"/>
+            <path d="M198 72h30l-4 58h-22z" class="fig-solid"/>
+            <path d="M199.4 94h27.2"/>
+            <ellipse cx="68" cy="132" rx="42" ry="9" class="fig-solid"/>
+            <ellipse cx="68" cy="132" rx="26" ry="5.5"/>
+            <ellipse cx="150" cy="130" rx="30" ry="7" class="fig-solid"/>
+            <path d="M166 100h8a7 7 0 0 1 0 14h-8"/>
+            <path d="M134 92h32v24a10 10 0 0 1-10 10h-12a10 10 0 0 1-10-10z" class="fig-solid"/>
+          </svg>
+          <figcaption class="label">In the room</figcaption>
+        </figure>
 
-        <aside class="ledger reveal" aria-label="The gap between the room and the screen">
-          <div class="ledger__row">
-            <p class="label">In the room</p>
-            <ul>
-              <li>Great food</li>
-              <li>Great spaces</li>
-              <li>Great service</li>
-            </ul>
-          </div>
-          <div class="ledger__row ledger__row--muted">
-            <p class="label">On the screen</p>
-            <p class="ledger__line">Rarely the same story.</p>
-          </div>
-        </aside>
+        <figure class="gapfig__panel reveal">
+          <svg viewBox="0 0 260 190" role="img" aria-label="The same things on a phone: an image that never loaded, a plate cropped by the edge, a cup tilted out of line and text running off the screen.">
+            <defs><clipPath id="nf-screen"><path d="M88 22h84v162H88z"/></clipPath></defs>
+            <path d="M.75.75h258.5v188.5H.75z" class="fig-frame"/>
+            <path d="M88 8h84v176H88z"/>
+            <path d="M116 15h28"/>
+            <g clip-path="url(#nf-screen)">
+              <path d="M96 32h92"/>
+              <path d="M96 44h68v40H96z" class="fig-dash"/>
+              <path d="M96 44l68 40M164 44l-68 40" class="fig-dash"/>
+              <ellipse cx="92" cy="114" rx="44" ry="9.5"/>
+              <ellipse cx="92" cy="114" rx="27" ry="6"/>
+              <g transform="rotate(-15 146 104)">
+                <path d="M134 86h30v22a9 9 0 0 1-9 9h-12a9 9 0 0 1-9-9z" class="fig-solid"/>
+                <path d="M164 93h7a6 6 0 0 1 0 12h-7"/>
+              </g>
+              <path d="M96 142h62M96 152h34M96 162h96"/>
+            </g>
+          </svg>
+          <figcaption class="label">On the screen</figcaption>
+        </figure>
       </div>
+
+      <p class="positioning__line reveal">Most hospitality businesses are better in person than they
+        are online. North Frame closes that gap.</p>
     </div>
   </section>
 
@@ -167,37 +258,28 @@
         <li class="svc__item reveal">
           <a class="svc__link" href="#contact">
             <span class="svc__num">01</span>
+            <svg class="icon svc__icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg>
             <h3 class="svc__title">Websites</h3>
-            <p class="svc__desc">Premium, responsive websites designed around the business, its identity
-              and its customers.</p>
-            <span class="svc__meta">
-              <span>Design</span><span>Development</span><span>Copy direction</span>
-            </span>
-            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></span>
+            <p class="svc__desc">Premium, responsive, built around the business.</p>
+            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
           </a>
         </li>
         <li class="svc__item reveal">
           <a class="svc__link" href="#contact">
             <span class="svc__num">02</span>
+            <svg class="icon svc__icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg>
             <h3 class="svc__title">Social&nbsp;Strategy</h3>
-            <p class="svc__desc">A clearer social presence with content direction and a strategy designed
-              around the brand.</p>
-            <span class="svc__meta">
-              <span>Positioning</span><span>Content direction</span><span>Art direction</span>
-            </span>
-            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></span>
+            <p class="svc__desc">Content direction with a real strategy behind it.</p>
+            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
           </a>
         </li>
         <li class="svc__item reveal">
           <a class="svc__link" href="#contact">
             <span class="svc__num">03</span>
+            <svg class="icon svc__icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg>
             <h3 class="svc__title">Paid&nbsp;Growth</h3>
-            <p class="svc__desc">Meta advertising strategy designed to turn attention into measurable
-              business opportunities.</p>
-            <span class="svc__meta">
-              <span>Meta ads</span><span>Creative strategy</span><span>Measurement</span>
-            </span>
-            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></span>
+            <p class="svc__desc">Meta advertising that turns attention into opportunities.</p>
+            <span class="svc__arrow" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
           </a>
         </li>
       </ol>
@@ -207,33 +289,38 @@
   <!-- ============ TICKET TO SCALE ============ -->
   <section class="section section--dark ticket" aria-labelledby="ticket-title">
     <div class="shell">
-      <p class="label reveal">03 — The approach we recommend</p>
+      <p class="label reveal">03 — The offer</p>
 
-      <h2 class="ticket__title reveal" id="ticket-title">
-        The <em>Ticket</em><br>to Scale
-      </h2>
+      <h2 class="ticket__title reveal" id="ticket-title">The <em>Ticket</em><br>to Scale</h2>
+
+      <div class="ticket__figs">
+        <figure class="ticket__fig reveal">
+          <svg viewBox="0 0 260 200" role="img" aria-label="Three separate providers — a website, a social presence, advertising — each pulling toward a different destination.">
+            <path d="M14 30h52v36H14zM14 82h52v36H14zM14 134h52v36H14z"/>
+            <g transform="translate(26.2 34.2) scale(1.15)"><path d="M2.5 4.5h19v15h-19z"/><path d="M2.5 8.5h19"/><path d="M2.5 19.5 14 8.5"/></g><g transform="translate(26.2 86.2) scale(1.15)"><path d="M2.5 2.5h19v19h-19z"/><path d="M9 2.5v19M15 2.5v19M2.5 9h19M2.5 15h19"/><path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/></g><g transform="translate(26.2 138.2) scale(1.15)"><path d="M2.5 20.5h19"/><path d="M4 16.5l5-5 4 3 6.5-8.5"/><path d="M15.5 7h4.5v4.5"/></g>
+            <path d="M66 48L176 14"/><path d="M169.9 18.4L176 14L168.5 13.8"/><path d="M66 100L190 100"/><path d="M182.9 102.4L190 100L182.9 97.6"/><path d="M66 152L176 186"/><path d="M168.5 186.2L176 186L169.9 181.6"/>
+            <circle cx="186" cy="10" r="3.5"/><circle cx="200" cy="100" r="3.5"/><circle cx="186" cy="190" r="3.5"/>
+          </svg>
+          <figcaption class="label">Three providers</figcaption>
+        </figure>
+
+        <figure class="ticket__fig reveal">
+          <svg viewBox="0 0 260 200" role="img" aria-label="Website, positioning, social strategy and paid advertising converging into one system with a single direction.">
+            <path d="M12 8h52v36H12zM12 56h52v36H12zM12 104h52v36H12zM12 152h52v36H12z"/>
+            <g transform="translate(24.2 12.2) scale(1.15)"><path d="M2.5 4.5h19v15h-19z"/><path d="M2.5 8.5h19"/><path d="M2.5 19.5 14 8.5"/></g><g transform="translate(24.2 60.2) scale(1.15)"><path d="M7.5 4.5h14v6h-14z"/><path d="M12.5 13.5h9v6h-9z"/></g><g transform="translate(24.2 108.2) scale(1.15)"><path d="M2.5 2.5h19v19h-19z"/><path d="M9 2.5v19M15 2.5v19M2.5 9h19M2.5 15h19"/><path d="M9 9h6v6H9z" fill="currentColor" stroke="none"/></g><g transform="translate(24.2 156.2) scale(1.15)"><path d="M2.5 20.5h19"/><path d="M4 16.5l5-5 4 3 6.5-8.5"/><path d="M15.5 7h4.5v4.5"/></g>
+            <path d="M64 26 118 96M64 74l54 22M64 122l54-22M64 170l54-70"/>
+            <circle cx="124" cy="98" r="5" fill="currentColor" stroke="none"/>
+            <path d="M134 98L240 98"/><path d="M232.9 100.4L240 98L232.9 95.6"/>
+          </svg>
+          <figcaption class="label">One system</figcaption>
+        </figure>
+      </div>
 
       <div class="ticket__body">
-        <div class="prose prose--invert reveal">
-          <p>Most hospitality businesses end up with a web designer, a content creator and
-            somebody running ads. Three people, three directions, no shared plan — and a digital
-            presence that quietly works against itself.</p>
-          <p>The Ticket to Scale brings the parts that matter into one place: the website, the
-            positioning, the social presence and the paid advertising, built and run as a single
-            system.</p>
-        </div>
-
-        <div class="ticket__side reveal">
-          <ul class="chain">
-            <li>Website</li>
-            <li>Positioning</li>
-            <li>Social strategy</li>
-            <li>Paid advertising</li>
-          </ul>
-          <p class="ticket__statement">One direction.<br>One system.<br>One partner.</p>
-          <p class="ticket__fine">Scope is defined per business. No two systems are identical, and
-            nothing here is sold as a guaranteed result.</p>
-        </div>
+        <p class="ticket__statement reveal">One direction.<br>One system.<br>One partner.</p>
+        <p class="ticket__fine reveal">Website, positioning, social strategy and paid advertising,
+          built and run together. Scope is defined per business — nothing here is sold as a
+          guaranteed result.</p>
       </div>
     </div>
   </section>
@@ -246,36 +333,26 @@
         <h2 class="h-display reveal" id="why-title">Built around the business,<br>not a template.</h2>
       </div>
 
-      <div class="why__intro prose reveal">
-        <p>Every hospitality business has its own identity, audience and ambitions. North Frame does
-          not simply deliver a website. We build a digital presence that fits the business and gives
-          it a clearer direction.</p>
-      </div>
-
       <div class="principles">
         <article class="principle reveal">
-          <p class="principle__num">01</p>
+          <svg class="icon principle__mark" aria-hidden="true" focusable="false"><use href="#i-clarity"></use></svg>
           <h3 class="principle__title">Clarity</h3>
-          <p class="principle__desc">Everything has a purpose. If an element does not earn its place,
-            it does not stay.</p>
+          <p class="principle__desc">Everything has a purpose.</p>
         </article>
         <article class="principle reveal">
-          <p class="principle__num">02</p>
+          <svg class="icon principle__mark" aria-hidden="true" focusable="false"><use href="#i-positioning"></use></svg>
           <h3 class="principle__title">Positioning</h3>
-          <p class="principle__desc">The digital presence should reflect the quality of the business —
-            not sit a tier below it.</p>
+          <p class="principle__desc">The presence matches the business.</p>
         </article>
         <article class="principle reveal">
-          <p class="principle__num">03</p>
+          <svg class="icon principle__mark" aria-hidden="true" focusable="false"><use href="#i-conversion"></use></svg>
           <h3 class="principle__title">Conversion</h3>
-          <p class="principle__desc">Design should guide people toward taking action: a booking, a
-            visit, an order, a message.</p>
+          <p class="principle__desc">Design guides people to act.</p>
         </article>
         <article class="principle reveal">
-          <p class="principle__num">04</p>
+          <svg class="icon principle__mark" aria-hidden="true" focusable="false"><use href="#i-direction"></use></svg>
           <h3 class="principle__title">Direction</h3>
-          <p class="principle__desc">Every digital element should work toward the same objective,
-            in the same voice.</p>
+          <p class="principle__desc">Every element serves one objective.</p>
         </article>
       </div>
     </div>
@@ -289,22 +366,19 @@
         <h2 class="h-display reveal" id="industries-title">Made for<br>hospitality.</h2>
       </div>
 
-      <p class="industries__note reveal">We work with businesses where the experience is the product —
-        where a room, a plate and a photograph all have to say the same thing.</p>
-
       <ul class="inds">
-        <li class="reveal" style="--i:0"><span class="inds__num">01</span><span class="inds__name">Cafés</span></li>
-        <li class="reveal" style="--i:1"><span class="inds__num">02</span><span class="inds__name">Restaurants</span></li>
-        <li class="reveal" style="--i:2"><span class="inds__num">03</span><span class="inds__name">Pizzerias</span></li>
-        <li class="reveal" style="--i:3"><span class="inds__num">04</span><span class="inds__name">Bakeries</span></li>
-        <li class="reveal" style="--i:4"><span class="inds__num">05</span><span class="inds__name">Pâtisseries</span></li>
-        <li class="reveal" style="--i:5"><span class="inds__num">06</span><span class="inds__name">Hotels</span></li>
-        <li class="reveal" style="--i:6"><span class="inds__num">07</span><span class="inds__name">Boutique Hotels</span></li>
-        <li class="reveal" style="--i:7"><span class="inds__num">08</span><span class="inds__name">Lounges</span></li>
-        <li class="reveal" style="--i:8"><span class="inds__num">09</span><span class="inds__name">Rooftops</span></li>
-        <li class="reveal" style="--i:9"><span class="inds__num">10</span><span class="inds__name">Fast Food</span></li>
-        <li class="reveal" style="--i:10"><span class="inds__num">11</span><span class="inds__name">Sushi</span></li>
-        <li class="reveal" style="--i:11"><span class="inds__num">12</span><span class="inds__name">Dessert &amp; Ice Cream</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-cafe"></use></svg><span>Cafés</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-restaurant"></use></svg><span>Restaurants</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-pizzeria"></use></svg><span>Pizzerias</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-bakery"></use></svg><span>Bakeries</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-patisserie"></use></svg><span>Pâtisseries</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-hotel"></use></svg><span>Hotels</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-boutique"></use></svg><span>Boutique Hotels</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-lounge"></use></svg><span>Lounges</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-rooftop"></use></svg><span>Rooftops</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-fastfood"></use></svg><span>Fast Food</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-sushi"></use></svg><span>Sushi</span></li>
+        <li class="inds__tile reveal"><svg class="icon inds__icon" aria-hidden="true" focusable="false"><use href="#i-dessert"></use></svg><span>Dessert &amp; Ice Cream</span></li>
       </ul>
     </div>
   </section>
@@ -322,33 +396,42 @@
           <p class="step__num">01</p>
           <div class="step__body">
             <h3 class="step__title">Discover</h3>
-            <p class="step__desc">Understand the business, positioning and goals. What it is, who it is
-              for, and what it is actually trying to grow.</p>
+            <p class="step__desc">Understand the business, its positioning and its goals.</p>
           </div>
+          <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="Four corner marks: the frame is not drawn yet.">
+            <path d="M2 12V2h10M52 2h10v10M2 32v10h10M62 32v10H52"/>
+          </svg>
         </li>
         <li class="step reveal">
           <p class="step__num">02</p>
           <div class="step__body">
             <h3 class="step__title">Frame</h3>
-            <p class="step__desc">Define how the business should be presented digitally — the story,
-              the hierarchy, the art direction, the decisions.</p>
+            <p class="step__desc">Decide how it should be presented.</p>
           </div>
+          <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="The corner marks close into a complete frame.">
+            <path d="M2 2h60v40H2z"/>
+          </svg>
         </li>
         <li class="step reveal">
           <p class="step__num">03</p>
           <div class="step__body">
             <h3 class="step__title">Build</h3>
-            <p class="step__desc">Design and develop the digital experience, down to the spacing,
-              the loading time and the wording of a single button.</p>
+            <p class="step__desc">Design and develop the experience.</p>
           </div>
+          <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="The frame fills with a laid-out composition.">
+            <path d="M2 2h60v40H2z"/><path d="M2 13h60M25 13v29"/><path d="M32 21h23M32 27h18M32 33h23"/>
+          </svg>
         </li>
         <li class="step reveal">
           <p class="step__num">04</p>
           <div class="step__body">
             <h3 class="step__title">Grow</h3>
-            <p class="step__desc">Connect the website, social presence and advertising into a clearer
-              growth system, then refine it with what the numbers show.</p>
+            <p class="step__desc">Connect site, social and advertising into one system.</p>
           </div>
+          <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="An arrow leaves the completed frame, pointing out and up.">
+            <path d="M2 2h60v40H2z"/><path d="M2 13h60M25 13v29"/>
+            <path d="M34 34 56 12m-8 0h8v8"/>
+          </svg>
         </li>
       </ol>
     </div>
@@ -376,16 +459,12 @@
         <div class="founder__text">
           <p class="founder__name reveal">Youssef Cherif<span> — Founder, North Frame</span></p>
           <div class="prose reveal">
-            <p>North Frame started from a simple observation: the hospitality businesses I admired
-              most were often the ones represented worst online.</p>
-            <p>I built it to do that part properly — to present a business the way it deserves to be
-              seen, and to give it one clear digital direction instead of four disconnected services
-              pulling in different ways.</p>
-            <p>That is still the whole idea. Fewer moving parts, better decisions, work that holds up
-              when you look closely.</p>
+            <p>The hospitality businesses I admired most were the ones represented worst online.</p>
+            <p>North Frame exists to do that part properly: one clear digital direction, instead of
+              four disconnected services pulling different ways.</p>
           </div>
           <p class="founder__rule reveal">
-            <a class="link-arrow" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span></a>
+            <a class="link-arrow" href="#contact">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
           </p>
         </div>
       </div>
@@ -403,7 +482,7 @@
       <p class="cta__lede reveal">Tell us where your business is today and where you want to take it.</p>
       <p class="cta__action reveal">
         <a class="btn btn--invert btn--lg" href="mailto:hello@northframe.co?subject=Starting%20a%20conversation%20with%20North%20Frame">
-          Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span>
+          Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
         </a>
       </p>
     </div>
@@ -435,7 +514,7 @@
       <div class="footer__founder">
         <p class="label">Founder</p>
         <p class="footer__person">Youssef Cherif</p>
-        <a class="link-arrow" href="mailto:hello@northframe.co">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg></span></a>
+        <a class="link-arrow" href="mailto:hello@northframe.co">Start a conversation <span class="arr" aria-hidden="true"><svg viewBox="0 0 14 12" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span></a>
       </div>
     </div>
 

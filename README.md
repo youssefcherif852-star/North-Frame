@@ -51,22 +51,55 @@ Type: **Inter Tight** for display (tight tracking, editorial), **Inter** for bod
 and labels — both self-hosted as variable woff2, so there is no third-party
 request in the critical path and no layout shift from a late webfont. Every size
 is a `clamp()` in `:root`, so the scale is fluid rather than stepped at
-breakpoints. Arrows are drawn as inline SVG: Inter's Latin subsets have no U+2192,
-so a typed `→` would silently render in a fallback face.
+breakpoints. Arrows are drawn, not typed: Inter's Latin subsets have no U+2192, so
+a `→` in text would silently render in a fallback face.
 
 Motion is deliberately small: a masked line reveal in the hero, a 14px fade-up on
 section entry, a scroll-linked rule in the Approach section, and hover
 micro-interactions. All of it is disabled under `prefers-reduced-motion`, and the
 page is fully legible with JavaScript off (reveal states only apply under `html.js`).
 
+## Drawn, not written
+
+The page carries 357 words of visible copy. Wherever an argument could be shown
+instead of explained, it is drawn:
+
+| Section | What the drawing does |
+| --- | --- |
+| The gap | Two panels: the same cup, plate and glass composed on one table line, then cropped, tilted and half-loaded on a phone. The argument, without the paragraph. |
+| Services | A monoline mark per discipline — a browser frame with the brand diagonal, a post grid, a rising line. |
+| Ticket to Scale | Two diagrams side by side: three providers pulling toward three destinations, against four parts converging on one node and one arrow out. |
+| Why North Frame | Each principle is a small diagram — a frame holding one dot, a shape and its reflection, an arrow arriving at a target, three arrows travelling together. |
+| Industries | Twelve hospitality pictograms on a hairline grid. Each tile inverts on hover. |
+| Approach | The frame assembles across the four steps: corner marks, then a closed frame, then a filled composition, then an arrow leaving it. |
+
+All of it is one hairline language. The 20 pictograms live in a single inline
+`<symbol>` sprite; the eight diagrams are authored at their own scale. Because
+`stroke-width` is an inherited property it reaches into `<use>` shadow content, so
+icons carry the render size as a unitless `--s` and scale the stroke back to a
+constant hairline:
+
+```css
+.icon {
+  width:  calc(var(--s) * 1px);
+  stroke-width: calc(30 / var(--s));   /* 30 = 1.25px × the 24-unit grid */
+}
+```
+
+The diagrams use `vector-effect: non-scaling-stroke` to hold the same 1.25px line
+whether they render at 335px on a phone or 600px on a desktop.
+
+Every diagram carries a real `aria-label` describing what it shows, so the
+argument survives with images or sight unavailable.
+
 ## Sections
 
 1. Hero — *Digital growth, framed properly.*
-2. The gap — why good businesses end up mispresented online
+2. The gap — the two panels
 3. Services — Websites / Social Strategy / Paid Growth
-4. The Ticket to Scale — the combined offer
+4. The Ticket to Scale — three providers vs. one system
 5. Why North Frame — Clarity, Positioning, Conversion, Direction
-6. Industries — the twelve hospitality categories (nav "Work" points here)
+6. Industries — twelve hospitality tiles (nav "Work" points here)
 7. Approach — Discover, Frame, Build, Grow
 8. About — founder
 9. Final CTA + footer
