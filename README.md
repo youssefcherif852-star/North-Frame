@@ -99,21 +99,30 @@ instead of explained, it is drawn:
 | Industries | Twelve hospitality pictograms on a hairline grid. Each tile inverts on hover. |
 | Approach | The frame assembles across the four steps: corner marks, then a closed frame, then a filled composition, then an arrow leaving it. |
 
-All of it is one hairline language. The 20 pictograms live in a single inline
-`<symbol>` sprite; the eight diagrams are authored at their own scale. Because
-`stroke-width` is an inherited property it reaches into `<use>` shadow content, so
-icons carry the render size as a unitless `--s` and scale the stroke back to a
-constant hairline:
+## The marks
 
-```css
-.icon {
-  width:  calc(var(--s) * 1px);
-  stroke-width: calc(30 / var(--s));   /* 30 = 1.25px × the 24-unit grid */
-}
-```
+Twenty marks, drawn as one system rather than collected as a set. The rules:
 
-The diagrams use `vector-effect: non-scaling-stroke` to hold the same 1.25px line
-whether they render at 335px on a phone or 600px on a desktop.
+- **One vocabulary.** Horizontal and vertical rules, 45° diagonals, exact circles
+  and true circular arcs. Nothing freehand. The same geometry the page is built
+  from.
+- **One optical box.** Every mark is drawn inside an 18-unit box on a 24-unit grid
+  and centred on (12,12), so a grid of twelve reads as a system instead of a set
+  of drawings at different sizes. This is checked, not eyeballed — the audit
+  fails a mark that drifts off centre by more than 0.75 units or falls outside
+  17–18.5 units on its dominant axis.
+- **One hairline.** Every shape carries `vector-effect="non-scaling-stroke"` as an
+  *attribute*, which survives into `<use>` shadow content where a CSS rule cannot
+  reach. So a single `stroke-width: 1.25` paints the same hairline at 24px and at
+  44px, matching the page's own 1px rules. Measured from pixels, not assumed.
+- **The brand in the marks.** The three discipline marks are built from the
+  wordmark's own frame-and-diagonal: Websites is a framed page cut by the
+  diagonal, Paid Growth is that diagonal ascending to an arrowhead, and Social
+  Strategy is the frame subdivided.
+
+They live in one inline `<symbol>` sprite, generated — along with the copies
+inlined in the two Ticket diagrams — from a single source so the two can never
+drift apart.
 
 Every diagram carries a real `aria-label` describing what it shows, so the
 argument survives with images or sight unavailable.
@@ -178,6 +187,7 @@ Bugs this caught and fixed, rather than shipped:
 
 | Symptom | Cause |
 | --- | --- |
+| Icon set read as a generic icon pack, not part of this site | marks drawn at wildly different optical sizes — 18×8 next to 9×17.5 — with freehand curves the rest of the page never uses |
 | Service row arrows rendered as solid black triangles | an `<svg>` with no `fill`/`stroke` set |
 | An ivory stripe down the right edge of every dark section | `scrollbar-gutter: stable` reserved 15px the full-bleed sections never painted into |
 | The primary button dissolved into the page on hover | inverting a filled button that had no border |

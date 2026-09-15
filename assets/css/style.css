@@ -349,9 +349,13 @@ em { font-style: normal; }
 :is(.btn, .nav__cta, .link-arrow):focus-visible .arrbox > i { transform: translateX(0); }
 
 /* ---------- 4b. Drawn marks ----------
-   One hairline language for every graphic on the page. `stroke-width` is inherited,
-   so it reaches into <use> shadow content; --s carries the render size unitless so
-   the stroke can be scaled back to a constant ~1.25px hairline at any icon size. */
+   One hairline language for every graphic on the page. Every mark is drawn inside
+   the same 18-unit optical box on a 24-unit grid, centred on (12,12), from one
+   vocabulary: horizontal and vertical rules, 45-degree diagonals, exact circles
+   and true circular arcs. The shapes carry vector-effect="non-scaling-stroke"
+   as an attribute, which survives into <use> shadow content where a CSS rule
+   cannot reach — so a single stroke-width paints the same 1.25px hairline at
+   every size, matching the page's own rules. --s only sets the render size. */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 .icon {
@@ -361,7 +365,7 @@ em { font-style: normal; }
   flex: 0 0 auto;
   fill: none;
   stroke: currentColor;
-  stroke-width: calc(30 / var(--s));
+  stroke-width: 1.25;
   stroke-linecap: square;
   stroke-linejoin: miter;
 }
@@ -794,7 +798,7 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .inds__icon {
-  --s: 34;
+  --s: 38;
   color: var(--fg-soft);
   transition: color var(--fast) var(--ease), transform var(--mid) var(--ease-out);
 }
