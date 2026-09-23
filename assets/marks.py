@@ -7,10 +7,11 @@ them reads as one system instead of a set of drawings."""
 # name -> (list of <path d> strings, list of <circle> tuples, list of filled paths)
 MARKS = {
   # --- disciplines: these carry the brand's own frame-and-diagonal ---
-  'web': (['M3 3h18v18H3z', 'M3 7h18', 'M3 21 17 7'], [], []),
-  'social': (['M3 3h18v18H3z', 'M9 3v18M15 3v18M3 9h18M3 15h18'], [], ['M9 9h6v6H9z']),
+  'web': (['M3 3h18v18H3z', 'M3 8h18', 'M7 13h10'], [], []),
+  'social': (['M7.6 11 16.4 6.5', 'M7.6 13 16.4 17.5'],
+             [(5.5, 12, 2.3), (18.5, 5.5, 2.3), (18.5, 18.5, 2.3)], []),
   'growth': (['M3 21h18', 'M3 21 21 3', 'M13 3h8v8'], [], []),
-  'system': (['M12 3v6M12 15v6M3 12h6M15 12h6'], [], ['M9 9h6v6H9z']),
+  'system': (['M3 3h13v13H3z', 'M8 8h13v13H8z'], [], ['M8 8h8v8H8z']),
 
   # --- principles: diagrams, not objects ---
   'clarity': (['M3 6h18v12H3z'], [(12, 12, 2.2)], []),
@@ -30,12 +31,12 @@ MARKS = {
   'patisserie': (['M4 16h16v4.5H4z', 'M6 11.5h12v4.5H6z', 'M8 7h8v4.5H8z'],
                  [(12, 4.5, 1.5)], []),
   'hotel': (['M4 3h16v18H4z', 'M4 8h16M4 13h16', 'M10 21v-4.5h4V21'], [], []),
-  'boutique': (['M11 12h10', 'M16 12v5M19.5 12v5'], [(7, 12, 4)], []),
+  'boutique': (['M4 5v14', 'M4 13h16v6', 'M3 19h18', 'M6 13v-4a2 2 0 0 0 4 0v4z'], [], []),
   'lounge': (['M3 5h18l-9 9z', 'M12 14v6', 'M7 20.5h10'], [(9, 7.8, 1.2)], []),
-  'rooftop': (['M8 21V11h8v10', 'M5 11h14', 'M7.5 7a4.5 4.5 0 0 1 9 0z', 'M12 7v4'], [], []),
+  'rooftop': (['M4 11a8 8 0 0 1 16 0', 'M12 11v10', 'M3 21h18'], [], []),
   'fastfood': (['M4 12a8 8 0 0 1 16 0z', 'M4.5 15h15', 'M4.5 17.5h15v3h-15z'], [], []),
-  'sushi': (['M3 17.5h18'],
-            [(7.6, 10.5, 4.2), (7.6, 10.5, 1.5), (16.8, 12, 3.4), (16.8, 12, 1.2)], []),
+  'sushi': (['M3 20h18', 'M15 7 21 3', 'M15 10 21 6'],
+            [(9, 14, 5.2), (9, 14, 3)], []),
   'dessert': (['M7.6 10.5 12 21 16.4 10.5'], [(12, 8, 5)], []),
 }
 
