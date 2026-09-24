@@ -87,12 +87,12 @@ with JavaScript off (reveal states only apply under `html.js`).
 
 ## Drawn, not written
 
-The page carries 357 words of visible copy. Wherever an argument could be shown
-instead of explained, it is drawn:
+Copy follows the brief's wording, kept to one short paragraph per section at most.
+Wherever an argument could be shown instead of explained, it is also drawn:
 
 | Section | What the drawing does |
 | --- | --- |
-| The gap | Two panels: the same cup, plate and glass composed on one table line, then cropped, tilted and half-loaded on a phone. The argument, without the paragraph. |
+| The gap | Two panels: the same cup, plate and glass composed on one table line, then cropped, tilted and half-loaded on a phone. It sits under the *great food, great spaces, great service* line and makes the same point visually. |
 | Services | A monoline mark per discipline — a browser frame with the brand diagonal, a post grid, a rising line. |
 | Ticket to Scale | Two diagrams side by side: three providers pulling toward three destinations, against four parts converging on one node and one arrow out. |
 | Why North Frame | Each principle is a small diagram — a frame holding one dot, a shape and its reflection, an arrow arriving at a target, three arrows travelling together. |

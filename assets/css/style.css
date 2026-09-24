@@ -225,6 +225,15 @@ em { font-style: normal; }
     align-items: start;
   }
   .sec-head .label { padding-top: .5rem; }
+  .sec-head__lede { grid-column: 2; }
+}
+.sec-head__lede {
+  font-size: var(--t-lede);
+  line-height: 1.45;
+  letter-spacing: -.014em;
+  color: var(--fg-soft);
+  max-width: 44ch;
+  text-wrap: pretty;
 }
 
 /* ---------- 3b. Masked line reveal ----------
@@ -630,6 +639,29 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
 @media (min-width: 48rem) { .hero__rail { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* ---------- 8. The gap ---------- */
+.gap-intro {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.gap-intro__triad {
+  font-family: var(--display);
+  font-size: var(--t-h3);
+  line-height: 1.12;
+  letter-spacing: -.03em;
+}
+.gap-intro__text { color: var(--fg-soft); max-width: 44ch; text-wrap: pretty; }
+@media (min-width: 48rem) {
+  .gap-intro { grid-template-columns: 1fr 1fr; align-items: end; }
+}
+/* Starts on the heading's own column line: .sec-head is 1fr 3fr with gap --g. */
+@media (min-width: 60rem) {
+  .gap-intro {
+    --g: clamp(1.5rem, 3vw, 2.75rem);
+    margin-left: calc((100% - var(--g)) / 4 + var(--g));
+  }
+}
+
 .gapfig { display: grid; gap: clamp(1.75rem, 4vw, 3rem); }
 @media (min-width: 48rem) { .gapfig { grid-template-columns: 1fr 1fr; } }
 
@@ -715,7 +747,23 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
   font-weight: 400;
   line-height: .92;
   letter-spacing: -.045em;
+}
+.ticket__head {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
   margin: clamp(1.5rem, 4vw, 3rem) 0 clamp(2.5rem, 6vw, 5rem);
+}
+.ticket__lede {
+  font-size: var(--t-lede);
+  line-height: 1.45;
+  letter-spacing: -.014em;
+  color: var(--fg-soft);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+@media (min-width: 62rem) {
+  .ticket__head { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; }
+  .ticket__lede { padding-bottom: .6rem; }
 }
 .ticket__title em { color: var(--fg-decor); }
 
@@ -750,11 +798,22 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
   border-block: 1px solid var(--rule);
 }
 .principle {
+  position: relative;
   background: var(--bg);
   padding: clamp(1.75rem, 3.5vw, 2.75rem) 0;
   padding-right: clamp(1rem, 3vw, 3rem);
 }
 .principle__mark { --s: 44; color: var(--fg); }
+.principle__num {
+  position: absolute;
+  top: clamp(1.75rem, 3.5vw, 2.75rem);
+  right: clamp(1rem, 3vw, 3rem);
+  font-size: var(--t-label);
+  letter-spacing: .16em;
+  color: var(--fg-faint);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 44.999rem) { .principle__num { right: 0; } }
 .principle__title {
   font-family: var(--display);
   font-size: var(--t-h3);
