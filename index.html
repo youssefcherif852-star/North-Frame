@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>North Frame — Digital Growth Partner for Hospitality Businesses</title>
 <meta name="description" content="North Frame helps cafés, restaurants, hotels and hospitality businesses build premium digital experiences and clearer growth systems.">
-<meta name="theme-color" content="#dceeff">
+<meta name="theme-color" content="#FAF8F5">
 <meta name="author" content="Youssef Cherif">
 
 <meta property="og:type" content="website">
@@ -35,15 +35,6 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
-  <defs>
-    <!-- Grain for the inflated ribbons: flat fills, roughened, no gradients -->
-    <filter id="grain" x="-20%" y="-60%" width="140%" height="220%">
-      <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="7" result="n"/>
-      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .32 0" result="a"/>
-      <feComposite in="a" in2="SourceGraphic" operator="in" result="g"/>
-      <feBlend in="SourceGraphic" in2="g" mode="multiply"/>
-    </filter>
-  </defs>
   <!-- Disciplines -->
   <symbol id="i-web" viewBox="0 0 24 24">
     <path d="M3 3h18v18H3z" vector-effect="non-scaling-stroke"/>
@@ -92,7 +83,7 @@
   </symbol>
 </svg>
 
-<div class="marquee" aria-hidden="true">
+<div class="marquee is-dark" aria-hidden="true">
   <div class="marquee__track">
     <span>Digital growth, framed properly</span><i>★</i><span>Websites</span><i>★</i><span>Social strategy</span><i>★</i><span>Paid growth</span><i>★</i><span>The Ticket to Scale</span><i>★</i>
     <span>Digital growth, framed properly</span><i>★</i><span>Websites</span><i>★</i><span>Social strategy</span><i>★</i><span>Paid growth</span><i>★</i><span>The Ticket to Scale</span><i>★</i>
@@ -127,9 +118,9 @@
 <div class="menu" id="mobile-menu" hidden data-menu>
   <nav class="menu__inner shell" aria-label="Mobile">
     <ul class="menu__list">
-      <li><a href="#work">Work</a></li>
+      <li class="is-dark"><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#approach">Approach</a></li>
+      <li class="is-dark"><a href="#approach">Approach</a></li>
       <li><a href="#about">About</a></li>
     </ul>
     <a class="btn btn--primary btn--block" href="#contact">Start a conversation <svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></a>
@@ -140,12 +131,12 @@
   <span id="top" class="anchor" aria-hidden="true"></span>
 
   <!-- ============ HERO ============ -->
-  <section class="band band--sky hero" aria-labelledby="hero-title">
+  <section class="band hero" aria-labelledby="hero-title">
     <svg class="ribbon ribbon--hero" viewBox="0 0 1200 420" aria-hidden="true" focusable="false">
-        <g filter="url(#grain)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path class="rb-shade" d="M-60 330 C 180 60, 420 400, 640 210 S 1010 30, 1260 170" stroke-width="150" transform="translate(0 18)"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path class="rb-body" d="M-60 330 C 180 60, 420 400, 640 210 S 1010 30, 1260 170" stroke-width="129"/>
-          <path class="rb-light" d="M-60 330 C 180 60, 420 400, 640 210 S 1010 30, 1260 170" stroke-width="24" transform="translate(0 -30)"/>
+          <path class="rb-fill" d="M-60 330 C 180 60, 420 400, 640 210 S 1010 30, 1260 170" stroke-width="124"/>
+          <path class="rb-light" d="M-60 330 C 180 60, 420 400, 640 210 S 1010 30, 1260 170" stroke-width="2.5" transform="translate(0 -30)"/>
         </g>
       </svg>
     <div class="shell hero__shell">
@@ -156,10 +147,10 @@
         <span class="line">framed properly.</span>
       </h1>
 
-      <span class="sticker sticker--ember sticker--round hero__st1" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
-      <span class="sticker sticker--sun sticker--round hero__st2" aria-hidden="true"><b>NF</b></span>
-      <span class="sticker sticker--violet sticker--square hero__st3" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
-      <span class="sticker sticker--mint sticker--round hero__st4" aria-hidden="true"><svg class="icon"><use href="#i-social"></use></svg></span>
+      <span class="sticker sticker--round hero__st1 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
+      <span class="sticker sticker--round hero__st2" aria-hidden="true"><b>NF</b></span>
+      <span class="sticker sticker--square hero__st3 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
+      <span class="sticker sticker--round hero__st4" aria-hidden="true"><svg class="icon"><use href="#i-social"></use></svg></span>
 
       <p class="hero__lede">North Frame helps hospitality businesses build a stronger
         digital presence through premium websites, strategic marketing and growth-focused systems.</p>
@@ -169,21 +160,21 @@
       </div>
 
       <ul class="hero__rail" aria-label="What we do">
-        <li class="chip chip--mint"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg>Websites</li>
-        <li class="chip chip--lav"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg>Social</li>
-        <li class="chip chip--sun"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg>Paid growth</li>
-        <li class="chip chip--paper"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-system"></use></svg>Systems</li>
+        <li class="chip is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg>Websites</li>
+        <li class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg>Social</li>
+        <li class="chip is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg>Paid growth</li>
+        <li class="chip"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-system"></use></svg>Systems</li>
       </ul>
     </div>
   </section>
 
   <!-- ============ THE GAP ============ -->
-  <section class="band band--paper positioning" aria-labelledby="positioning-title">
+  <section class="band is-dark positioning" aria-labelledby="positioning-title">
     <div class="shell">
       <div class="sec-head">
         <p class="tag">01 — The gap</p>
         <h2 class="display h-display" id="positioning-title">Good businesses deserve a better digital presence.</h2>
-        <span class="sticker sticker--lav sticker--square gap__st1" aria-hidden="true"><svg class="icon"><use href="#i-clarity"></use></svg></span>
+        <span class="sticker sticker--square gap__st1 is-light" aria-hidden="true"><svg class="icon"><use href="#i-clarity"></use></svg></span>
       </div>
 
       <div class="gap-intro">
@@ -194,7 +185,7 @@
       </div>
 
       <div class="gapfig">
-        <figure class="card card--mint gapfig__panel">
+        <figure class="card is-light gapfig__panel">
           <svg viewBox="0 0 260 190" role="img" aria-label="A composed still life — a plate, a cup and saucer, a glass — all sitting on one table line inside a complete frame.">
             <path d="M14 28V14h14M232 14h14v14M14 162v14h14M246 162v14h-14" class="fig-tick"/>
             <path d="M24 132h212"/>
@@ -206,10 +197,10 @@
             <path d="M166 100h8a7 7 0 0 1 0 14h-8"/>
             <path d="M134 92h32v24a10 10 0 0 1-10 10h-12a10 10 0 0 1-10-10z" class="fig-solid"/>
           </svg>
-          <figcaption class="tag tag--paper">In the room</figcaption>
+          <figcaption class="tag">In the room</figcaption>
         </figure>
 
-        <figure class="card card--lav gapfig__panel">
+        <figure class="card gapfig__panel">
           <svg viewBox="0 0 260 190" role="img" aria-label="The same things on a phone: an image that never loaded, a plate cropped by the edge, a cup tilted out of line and text running off the screen.">
             <defs><clipPath id="nf-screen"><path d="M88 22h84v162H88z"/></clipPath></defs>
             <path d="M88 8h84v176H88z" class="fig-solid"/>
@@ -227,7 +218,7 @@
               <path d="M96 142h62M96 152h34M96 162h96"/>
             </g>
           </svg>
-          <figcaption class="tag tag--paper">On the screen</figcaption>
+          <figcaption class="tag">On the screen</figcaption>
         </figure>
       </div>
 
@@ -237,12 +228,12 @@
   </section>
 
   <!-- ============ SERVICES ============ -->
-  <section class="band band--gray services" id="services" aria-labelledby="services-title">
+  <section class="band services" id="services" aria-labelledby="services-title">
     <svg class="ribbon ribbon--services" viewBox="0 0 900 320" aria-hidden="true" focusable="false">
-        <g filter="url(#grain)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path class="rb-shade" d="M40 280 C 260 -30, 560 330, 860 60" stroke-width="110" transform="translate(0 13)"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path class="rb-body" d="M40 280 C 260 -30, 560 330, 860 60" stroke-width="95"/>
-          <path class="rb-light" d="M40 280 C 260 -30, 560 330, 860 60" stroke-width="18" transform="translate(0 -22)"/>
+          <path class="rb-fill" d="M40 280 C 260 -30, 560 330, 860 60" stroke-width="90"/>
+          <path class="rb-light" d="M40 280 C 260 -30, 560 330, 860 60" stroke-width="2.5" transform="translate(0 -22)"/>
         </g>
       </svg>
     <div class="shell">
@@ -254,7 +245,7 @@
       <ol class="svc">
         <li class="svc__item">
           <a class="card svc__link" href="#contact">
-            <span class="svc__top"><span class="svc__num">01</span><span class="badge badge--mint"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg></span></span>
+            <span class="svc__top"><span class="svc__num">01</span><span class="badge is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-web"></use></svg></span></span>
             <h3 class="svc__title">Websites</h3>
             <p class="svc__desc">Premium, responsive websites designed around the business, its identity and its customers.</p>
             <span class="svc__arrow" aria-hidden="true"><svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
@@ -262,7 +253,7 @@
         </li>
         <li class="svc__item">
           <a class="card svc__link" href="#contact">
-            <span class="svc__top"><span class="svc__num">02</span><span class="badge badge--lav"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg></span></span>
+            <span class="svc__top"><span class="svc__num">02</span><span class="badge"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-social"></use></svg></span></span>
             <h3 class="svc__title">Social&nbsp;Strategy</h3>
             <p class="svc__desc">A clearer social presence, with content direction and a strategy designed around the brand.</p>
             <span class="svc__arrow" aria-hidden="true"><svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
@@ -270,7 +261,7 @@
         </li>
         <li class="svc__item">
           <a class="card svc__link" href="#contact">
-            <span class="svc__top"><span class="svc__num">03</span><span class="badge badge--sun"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg></span></span>
+            <span class="svc__top"><span class="svc__num">03</span><span class="badge is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-growth"></use></svg></span></span>
             <h3 class="svc__title">Paid&nbsp;Growth</h3>
             <p class="svc__desc">Meta advertising strategy designed to turn attention into measurable business opportunities.</p>
             <span class="svc__arrow" aria-hidden="true"><svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></span>
@@ -281,10 +272,10 @@
   </section>
 
   <!-- ============ TICKET TO SCALE ============ -->
-  <section class="band band--sky ticket" aria-labelledby="ticket-title">
+  <section class="band ticket" aria-labelledby="ticket-title">
     <div class="shell">
-      <div class="ticket__card">
-        <p class="tag tag--paper">03 — The offer</p>
+      <div class="ticket__card is-dark">
+        <p class="tag">03 — The offer</p>
 
         <div class="ticket__head">
           <h2 class="display ticket__title" id="ticket-title">The Ticket to Scale</h2>
@@ -293,8 +284,8 @@
             direction. The Ticket to Scale brings the parts that matter into one growth system.</p>
         </div>
 
-        <span class="sticker sticker--sun sticker--round ticket__st1" aria-hidden="true"><b>★</b></span>
-        <span class="sticker sticker--ember sticker--square ticket__st2" aria-hidden="true"><svg class="icon"><use href="#i-system"></use></svg></span>
+        <span class="sticker sticker--round ticket__st1 is-light" aria-hidden="true"><b>★</b></span>
+        <span class="sticker sticker--square ticket__st2 is-light" aria-hidden="true"><svg class="icon"><use href="#i-system"></use></svg></span>
 
         <div class="ticket__figs">
           <figure class="card ticket__fig">
@@ -307,7 +298,7 @@
             <figcaption class="tag">Three providers</figcaption>
           </figure>
 
-          <figure class="card card--mint ticket__fig">
+          <figure class="card is-light ticket__fig">
             <svg viewBox="0 0 260 200" role="img" aria-label="Website, positioning, social strategy and paid advertising converging into one system with a single direction.">
               <path d="M12 8h52v36H12zM12 56h52v36H12zM12 104h52v36H12zM12 152h52v36H12z"/>
               <g transform="translate(24.2 12.2) scale(1.15)"><path d="M3 3h18v18H3z" vector-effect="non-scaling-stroke"/><path d="M3 8h18" vector-effect="non-scaling-stroke"/><path d="M7 13h10" vector-effect="non-scaling-stroke"/></g><g transform="translate(24.2 60.2) scale(1.15)"><path d="M3 12h18" vector-effect="non-scaling-stroke"/><path d="M7 4h10v6H7z" vector-effect="non-scaling-stroke"/><path d="M7 14h10v6H7z" vector-effect="non-scaling-stroke"/></g><g transform="translate(24.2 108.2) scale(1.15)"><path d="M7.6 11 16.4 6.5" vector-effect="non-scaling-stroke"/><path d="M7.6 13 16.4 17.5" vector-effect="non-scaling-stroke"/><circle cx="5.5" cy="12" r="2.3" vector-effect="non-scaling-stroke"/><circle cx="18.5" cy="5.5" r="2.3" vector-effect="non-scaling-stroke"/><circle cx="18.5" cy="18.5" r="2.3" vector-effect="non-scaling-stroke"/></g><g transform="translate(24.2 156.2) scale(1.15)"><path d="M3 21h18" vector-effect="non-scaling-stroke"/><path d="M3 21 21 3" vector-effect="non-scaling-stroke"/><path d="M13 3h8v8" vector-effect="non-scaling-stroke"/></g>
@@ -330,7 +321,7 @@
   </section>
 
   <!-- ============ WHY NORTH FRAME ============ -->
-  <section class="band band--paper why" id="work" aria-labelledby="why-title">
+  <section class="band is-dark why" id="work" aria-labelledby="why-title">
     <div class="shell">
       <div class="sec-head">
         <p class="tag">04 — Why North Frame</p>
@@ -341,23 +332,23 @@
       </div>
 
       <div class="principles">
-        <article class="card card--lav principle">
-          <span class="principle__top"><span class="badge badge--paper"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clarity"></use></svg></span><span class="principle__num" aria-hidden="true">01</span></span>
+        <article class="card principle">
+          <span class="principle__top"><span class="badge is-light"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clarity"></use></svg></span><span class="principle__num" aria-hidden="true">01</span></span>
           <h3 class="principle__title">Clarity</h3>
           <p class="principle__desc">Everything has a purpose.</p>
         </article>
-        <article class="card card--mint principle">
-          <span class="principle__top"><span class="badge badge--paper"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-positioning"></use></svg></span><span class="principle__num" aria-hidden="true">02</span></span>
+        <article class="card is-light principle">
+          <span class="principle__top"><span class="badge is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-positioning"></use></svg></span><span class="principle__num" aria-hidden="true">02</span></span>
           <h3 class="principle__title">Positioning</h3>
           <p class="principle__desc">The digital presence should reflect the quality of the business.</p>
         </article>
-        <article class="card card--sun principle">
-          <span class="principle__top"><span class="badge badge--paper"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-conversion"></use></svg></span><span class="principle__num" aria-hidden="true">03</span></span>
+        <article class="card principle">
+          <span class="principle__top"><span class="badge is-light"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-conversion"></use></svg></span><span class="principle__num" aria-hidden="true">03</span></span>
           <h3 class="principle__title">Conversion</h3>
           <p class="principle__desc">Design should guide people toward taking action.</p>
         </article>
-        <article class="card card--ember principle">
-          <span class="principle__top"><span class="badge badge--paper"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-direction"></use></svg></span><span class="principle__num" aria-hidden="true">04</span></span>
+        <article class="card is-light principle">
+          <span class="principle__top"><span class="badge is-dark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-direction"></use></svg></span><span class="principle__num" aria-hidden="true">04</span></span>
           <h3 class="principle__title">Direction</h3>
           <p class="principle__desc">Every digital element should work toward the same objective.</p>
         </article>
@@ -366,19 +357,19 @@
   </section>
 
   <!-- ============ APPROACH ============ -->
-  <section class="band band--gray approach" id="approach" aria-labelledby="approach-title" data-approach>
+  <section class="band approach" id="approach" aria-labelledby="approach-title" data-approach>
     <svg class="ribbon ribbon--approach" viewBox="0 0 900 300" aria-hidden="true" focusable="false">
-        <g filter="url(#grain)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path class="rb-shade" d="M-20 60 C 240 300, 520 -40, 920 220" stroke-width="100" transform="translate(0 12)"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path class="rb-body" d="M-20 60 C 240 300, 520 -40, 920 220" stroke-width="86"/>
-          <path class="rb-light" d="M-20 60 C 240 300, 520 -40, 920 220" stroke-width="16" transform="translate(0 -20)"/>
+          <path class="rb-fill" d="M-20 60 C 240 300, 520 -40, 920 220" stroke-width="81"/>
+          <path class="rb-light" d="M-20 60 C 240 300, 520 -40, 920 220" stroke-width="2.5" transform="translate(0 -20)"/>
         </g>
       </svg>
     <div class="shell">
       <div class="sec-head">
         <p class="tag">05 — Approach</p>
         <h2 class="display h-display" id="approach-title">Four steps, one direction.</h2>
-        <span class="sticker sticker--mint sticker--round approach__st1" aria-hidden="true"><svg class="icon"><use href="#i-direction"></use></svg></span>
+        <span class="sticker sticker--round approach__st1 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-direction"></use></svg></span>
       </div>
 
       <ol class="steps">
@@ -390,7 +381,7 @@
           <h3 class="step__title">Discover</h3>
           <p class="step__desc">Understand the business, its positioning and its goals.</p>
         </li>
-        <li class="card card--lav step">
+        <li class="card is-dark step">
           <p class="step__num">02</p>
           <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="The corner marks close into a complete frame.">
             <path d="M2 2h60v40H2z"/>
@@ -398,7 +389,7 @@
           <h3 class="step__title">Frame</h3>
           <p class="step__desc">Define how the business should be presented digitally.</p>
         </li>
-        <li class="card card--sun step">
+        <li class="card step">
           <p class="step__num">03</p>
           <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="The frame fills with a laid-out composition.">
             <path d="M2 2h60v40H2z"/><path d="M2 13h60M25 13v29"/><path d="M32 21h23M32 27h18M32 33h23"/>
@@ -406,7 +397,7 @@
           <h3 class="step__title">Build</h3>
           <p class="step__desc">Design and develop the experience.</p>
         </li>
-        <li class="card card--mint step">
+        <li class="card is-dark step">
           <p class="step__num">04</p>
           <svg class="step__fig" viewBox="0 0 64 44" role="img" aria-label="An arrow leaves the completed frame, pointing out and up.">
             <path d="M2 2h60v40H2z"/><path d="M2 13h60M25 13v29"/>
@@ -422,7 +413,7 @@
   <!-- ============ FOUNDER ============ -->
   <!-- To add a real founder photograph later: replace .founder__plate's monogram with
        <img src="assets/img/youssef-cherif.jpg" alt="Youssef Cherif, founder of North Frame" width="900" height="1100" loading="lazy"> -->
-  <section class="band band--sky founder" id="about" aria-labelledby="founder-title">
+  <section class="band is-dark founder" id="about" aria-labelledby="founder-title">
     <div class="shell">
       <div class="sec-head">
         <p class="tag">06 — About</p>
@@ -430,13 +421,13 @@
       </div>
 
       <div class="founder__body">
-        <figure class="founder__plate" aria-hidden="true">
+        <figure class="founder__plate is-light" aria-hidden="true">
           <span class="founder__monogram">NF</span>
           <span class="founder__plate-foot">
             <span>Youssef&nbsp;Cherif</span>
             <span>Founder</span>
           </span>
-          <span class="sticker sticker--sun sticker--round founder__st1" aria-hidden="true"><b>★</b></span>
+          <span class="sticker sticker--round founder__st1 is-dark" aria-hidden="true"><b>★</b></span>
         </figure>
 
         <div class="card founder__text">
@@ -457,20 +448,20 @@
   </section>
 
   <!-- ============ FINAL CTA ============ -->
-  <section class="band band--paper cta" id="contact" aria-labelledby="cta-title">
+  <section class="band cta" id="contact" aria-labelledby="cta-title">
     <svg class="ribbon ribbon--cta" viewBox="0 0 1200 420" aria-hidden="true" focusable="false">
-        <g filter="url(#grain)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path class="rb-shade" d="M-60 120 C 220 420, 520 0, 760 220 S 1080 400, 1260 140" stroke-width="140" transform="translate(0 17)"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path class="rb-body" d="M-60 120 C 220 420, 520 0, 760 220 S 1080 400, 1260 140" stroke-width="120"/>
-          <path class="rb-light" d="M-60 120 C 220 420, 520 0, 760 220 S 1080 400, 1260 140" stroke-width="22" transform="translate(0 -28)"/>
+          <path class="rb-fill" d="M-60 120 C 220 420, 520 0, 760 220 S 1080 400, 1260 140" stroke-width="115"/>
+          <path class="rb-light" d="M-60 120 C 220 420, 520 0, 760 220 S 1080 400, 1260 140" stroke-width="2.5" transform="translate(0 -28)"/>
         </g>
       </svg>
     <div class="shell cta__shell">
       <p class="tag">07 — Start here</p>
-      <h2 class="display cta__title" id="cta-title"><span class="line">Your business has a direction.</span><span class="line cta__em">Let’s frame it properly.</span></h2>
-      <span class="sticker sticker--ember sticker--round cta__st1" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
-      <span class="sticker sticker--violet sticker--square cta__st2" aria-hidden="true"><b>NF</b></span>
-      <span class="sticker sticker--mint sticker--round cta__st3" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
+      <h2 class="display cta__title" id="cta-title"><span class="line">Your business has a direction.</span><span class="line cta__em is-dark">Let’s frame it properly.</span></h2>
+      <span class="sticker sticker--round cta__st1 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
+      <span class="sticker sticker--square cta__st2 is-dark" aria-hidden="true"><b>NF</b></span>
+      <span class="sticker sticker--round cta__st3" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
       <p class="cta__lede">Tell us where your business is today and where you want to take it.</p>
       <p class="cta__action">
         <a class="btn btn--primary btn--lg" href="mailto:hello@northframe.co?subject=Starting%20a%20conversation%20with%20North%20Frame">Start a conversation <svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></a>
@@ -480,7 +471,7 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer" aria-labelledby="footer-title">
+<footer class="footer is-dark" aria-labelledby="footer-title">
   <div class="shell">
     <h2 class="visually-hidden" id="footer-title">Site footer</h2>
 
@@ -490,7 +481,7 @@
       </div>
 
       <nav class="footer__nav" aria-label="Footer">
-        <p class="tag tag--dark">Navigate</p>
+        <p class="tag">Navigate</p>
         <ul>
           <li><a href="#work">Work</a></li>
           <li><a href="#services">Services</a></li>
@@ -501,9 +492,9 @@
       </nav>
 
       <div class="footer__founder">
-        <p class="tag tag--dark">Founder</p>
+        <p class="tag">Founder</p>
         <p class="footer__person">Youssef Cherif</p>
-        <a class="btn btn--paper" href="mailto:hello@northframe.co">Start a conversation <svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></a>
+        <a class="btn btn--primary" href="mailto:hello@northframe.co">Start a conversation <svg class="arr" viewBox="0 0 14 12" aria-hidden="true" focusable="false"><path d="M.5 6h12M8.4 1.6 12.8 6l-4.4 4.4"/></svg></a>
       </div>
     </div>
 

@@ -35,46 +35,47 @@ nothing to build; publish the repository root as-is.
 
 ## Design system
 
-The site uses the **Slush** sticker-book system (the `/slushdesign` skill in
-`.claude/skills/slushdesign/`): pastel paper, crushed display type, black
-hand-cut outlines, pill controls and a shared sticker palette.
+The layout follows the **Slush** sticker-book system (the `/slushdesign` skill in
+`.claude/skills/slushdesign/`): crushed display type, pill controls, outlined
+cards, stickers, ribbons and a marquee. The colour is the brand's own pair, and
+nothing else:
 
-| Token | Value | Role |
-| --- | --- | --- |
-| `--color-carbon` | `#000000` | Text, 1px outlines, primary buttons, marquee, footer |
-| `--color-paper-white` | `#ffffff` | Cards, ghost buttons, tags |
-| `--color-sky-wash` | `#dceeff` | Hero, Ticket, About bands; nav |
-| `--color-concrete-gray` | `#cccccc` | Services and Approach bands |
-| `--color-electric-blue` | `#4da2ff` | The 3D ribbons only — never a link or button |
-| `--color-mint-pop` / `--color-lavender` / `--color-sunburst` / `--color-ember` | | Sticker, chip and card fills |
-| `--color-voltage-violet` | `#5c4ade` | Ticket to Scale card, founder plate |
+| Token | Value |
+| --- | --- |
+| `--ink` | `#0F0F0F` |
+| `--ivory` | `#FAF8F5` |
 
-Rules the stylesheet keeps:
+No tints, no opacity steps, no third colour — checked by reading every computed
+colour on the rendered page, which returns exactly these two.
 
-- Sections are full-bleed colour bands (sky → white → gray); no dividers, no
-  shadows, no gradients anywhere.
-- Buttons, nav links, tags and chips are pills; cards use a 24–40px radius. Every
-  interactive element and card has a 1px black outline.
-- The primary action is black with white text; the secondary is white with a black
-  outline. White text only appears on black or violet.
-- Stickers (brand marks in coloured circles and squares) sit rotated and
-  overlapping the display type, never grid-aligned. All are `aria-hidden`.
-- The ribbons are inline SVG: three flat strokes along one path (shade, body,
-  highlight) roughened by one shared `feTurbulence` filter.
+Every component paints with `--bg` / `--fg`, and two classes swap them:
+`.is-dark` (ink ground, ivory ink) and `.is-light`. A dark band, a filled card, a
+filled sticker or chip are the same component in the other context, so nothing is
+styled twice.
+
+- Bands alternate ivory and ink down the page; the Ticket to Scale is an ink card
+  on an ivory band, and the footer closes in ink.
+- Buttons, nav links, tags and chips are pills; cards use a 24–40px radius; every
+  card and control has a 1px outline in the opposite colour.
+- Stickers are the brand marks in ink or ivory circles and squares, rotated and
+  overlapping the display type. All are `aria-hidden`.
+- Ribbons are hollow outlined tubes (an outer stroke, an inner stroke in the band
+  colour, one highlight line), so display type can cross them. Body text that
+  crosses a ribbon sits on a small plate of the band colour.
 
 Type: **Anton** for display (a free stand-in for Lateral 800), uppercase, at
 `line-height: 0.85` — the ceiling of the system's 0.75–0.85 range, because Anton's
-capitals run taller than Lateral's and lines collide below that. **Inter** (a
-stand-in for Aeonik Pro) for everything else: 500 for body, 700 for headings and
-controls, `0.032em` tracking on uppercase labels. Both are self-hosted woff2, so
-there is no third-party request. Every display size is a `clamp()`, so headlines
-wrap rather than overflow at phone width.
+capitals run taller than Lateral's and lines collide below that. **Inter** for
+everything else: 500 for body, 700 for headings and controls, `0.032em` tracking
+on uppercase labels. Both are self-hosted woff2. Every display size is a
+`clamp()`, so headlines wrap rather than overflow at phone width.
 
 ## Motion
 
-Deliberately little. The black marquee strip loops; buttons lift and tilt a degree
-on hover; service cards tilt and turn lavender. Nothing reveals on scroll. Under
-`prefers-reduced-motion` the marquee stops and hover transforms are off.
+Deliberately little. The ink marquee strip loops; buttons lift and tilt a degree
+on hover; ghost buttons and nav links invert; service cards tilt and turn ink.
+Nothing reveals on scroll. Under `prefers-reduced-motion` the marquee stops and
+hover transforms are off.
 
 ## Drawn, not written
 
@@ -145,9 +146,9 @@ argument survives with images or sight unavailable.
 ## Accessibility
 
 Single `h1`, ordered heading levels, a skip link, visible `:focus-visible` rings
-(white inside the dark areas), `aria-expanded` on the menu toggle, Escape to close,
-and no interactive target under 44px. Black on every pastel passes WCAG AA; white
-text sits only on black (21:1) and violet (6:1).
+(ivory inside the dark areas), `aria-expanded` on the menu toggle, Escape to close,
+and no interactive target under 44px. Ink on ivory and ivory on ink are 18:1, well past
+WCAG AAA.
 
 ## Verified
 
