@@ -280,6 +280,7 @@ img, svg { display: block; max-width: 100%; }
 .sticker--square { border-radius: 20px; }
 .sticker .icon { width: 46%; height: 46%; stroke-width: 1.6; }
 .sticker b { font: 400 calc(var(--s) * .42)/1 var(--font-display); }
+.sticker .logo-nf { width: 58%; }
 
 .ribbon { position: absolute; z-index: 0; pointer-events: none; height: auto; max-width: none; overflow: visible; }
 .rb-body  { stroke: var(--fg); }   /* outer edge */
@@ -316,12 +317,15 @@ img, svg { display: block; max-width: 100%; }
   min-height: var(--nav-h);
 }
 .nav__brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+/* The logo tile: ivory letters on an ink square, square corners as drawn. */
 .nav__mark {
   display: inline-grid; place-items: center;
   width: 44px; height: 44px;
-  border: 1px solid var(--fg); border-radius: var(--radius-pill);
+  background: var(--fg); color: var(--bg);
+  border: 1px solid var(--fg);
 }
-.nav__mark svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.logo-nf { display: block; width: 100%; aspect-ratio: 156 / 88; height: auto; }
+.nav__mark .logo-nf { width: 28px; }
 .nav__wordmark { font: 400 22px/1 var(--font-display); text-transform: uppercase; letter-spacing: .01em; }
 
 .nav__links { display: none; gap: 4px; }
@@ -531,7 +535,7 @@ img, svg { display: block; max-width: 100%; }
   border: 1px solid var(--ivory); border-radius: var(--radius-cards-elevated);
   rotate: -1.5deg;
 }
-.founder__monogram { font: 400 clamp(120px, 22vw, 260px)/0.8 var(--font-display); }
+.founder__monogram { width: clamp(190px, 34vw, 400px); }
 .founder__plate-foot {
   position: absolute; left: 24px; right: 24px; bottom: 24px;
   display: flex; justify-content: space-between;
@@ -568,6 +572,13 @@ img, svg { display: block; max-width: 100%; }
 .footer { padding-block: clamp(56px, 7vw, 96px) 32px; }
 .footer__top { display: grid; gap: 40px; }
 @media (min-width: 48rem) { .footer__top { grid-template-columns: 2fr 1fr 1fr; } }
+.footer__logo {
+  display: grid; place-items: center;
+  width: 96px; height: 96px; margin-bottom: 24px;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--fg);
+}
+.footer__logo .logo-nf { width: 62px; }
 .footer__tag { font-size: var(--text-subheading); font-weight: 700; line-height: 1.2; max-width: 20ch; }
 .footer__nav, .footer__founder { display: grid; gap: 16px; align-content: start; justify-items: start; }
 .footer__nav ul { display: grid; gap: 8px; }
@@ -628,6 +639,10 @@ img, svg { display: block; max-width: 100%; }
 
 <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
   <!-- Disciplines -->
+  <!-- The North Frame logo: serif N and F set tight. Letters only; the ink tile is the container. -->
+  <symbol id="logo-nf" viewBox="60 90 156 88">
+    <path d="M129.4 97.89 118.33 96.29V93.03H146.44V96.29L135.86 97.89V175.5H129.9L79.04 101.33V170.58L90.11 172.24V175.5H62V172.24L72.58 170.58V97.89L62 96.29V93.03H86.97L129.4 154.1ZM173.45 138.48V170.58L187.16 172.24V175.5H151.8V172.24L161.58 170.58V97.89L151 96.29V93.03H212.87V112.77H208.81L206.84 99.42Q199.95 98.56 186.92 98.56H173.45V132.94H197.74L199.65 123.1H203.4V148.44H199.65L197.74 138.48Z" style="fill:currentColor;stroke:currentColor;stroke-width:1.8;stroke-linejoin:miter"/>
+  </symbol>
   <symbol id="i-web" viewBox="0 0 24 24">
     <path d="M3 3h18v18H3z" vector-effect="non-scaling-stroke"/>
     <path d="M3 8h18" vector-effect="non-scaling-stroke"/>
@@ -686,7 +701,7 @@ img, svg { display: block; max-width: 100%; }
   <div class="nav__inner shell">
     <a class="nav__brand" href="#top" aria-label="North Frame — home">
       <span class="nav__mark" aria-hidden="true">
-        <svg viewBox="0 0 16 16" focusable="false"><path d="M1 15V1h14v14"/><path d="M1 15 15 1"/></svg>
+        <svg class="logo-nf" focusable="false"><use href="#logo-nf"></use></svg>
       </span>
       <span class="nav__wordmark">North&nbsp;Frame</span>
     </a>
@@ -740,7 +755,7 @@ img, svg { display: block; max-width: 100%; }
       </h1>
 
       <span class="sticker sticker--round hero__st1 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
-      <span class="sticker sticker--round hero__st2" aria-hidden="true"><b>NF</b></span>
+      <span class="sticker sticker--round hero__st2" aria-hidden="true"><svg class="logo-nf"><use href="#logo-nf"></use></svg></span>
       <span class="sticker sticker--square hero__st3 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
       <span class="sticker sticker--round hero__st4" aria-hidden="true"><svg class="icon"><use href="#i-social"></use></svg></span>
 
@@ -1014,7 +1029,7 @@ img, svg { display: block; max-width: 100%; }
 
       <div class="founder__body">
         <figure class="founder__plate is-light" aria-hidden="true">
-          <span class="founder__monogram">NF</span>
+          <svg class="founder__monogram logo-nf"><use href="#logo-nf"></use></svg>
           <span class="founder__plate-foot">
             <span>Youssef&nbsp;Cherif</span>
             <span>Founder</span>
@@ -1052,7 +1067,7 @@ img, svg { display: block; max-width: 100%; }
       <p class="tag">07 — Start here</p>
       <h2 class="display cta__title" id="cta-title"><span class="line">Your business has a direction.</span><span class="line cta__em is-dark">Let’s frame it properly.</span></h2>
       <span class="sticker sticker--round cta__st1 is-dark" aria-hidden="true"><svg class="icon"><use href="#i-growth"></use></svg></span>
-      <span class="sticker sticker--square cta__st2 is-dark" aria-hidden="true"><b>NF</b></span>
+      <span class="sticker sticker--square cta__st2 is-dark" aria-hidden="true"><svg class="logo-nf"><use href="#logo-nf"></use></svg></span>
       <span class="sticker sticker--round cta__st3" aria-hidden="true"><svg class="icon"><use href="#i-web"></use></svg></span>
       <p class="cta__lede">Tell us where your business is today and where you want to take it.</p>
       <p class="cta__action">
@@ -1069,6 +1084,7 @@ img, svg { display: block; max-width: 100%; }
 
     <div class="footer__top">
       <div class="footer__brand">
+        <span class="footer__logo" aria-hidden="true"><svg class="logo-nf"><use href="#logo-nf"></use></svg></span>
         <p class="footer__tag">Digital growth partner for hospitality businesses.</p>
       </div>
 

@@ -2,7 +2,8 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {Bg, Label, Rise, inOut, lerp, prog} from '../lib';
-import {Field, Mark3D} from '../three-bits';
+import {Field, Logo3D} from '../three-bits';
+import {FPS} from '../timeline';
 import {Cam} from '../three-bits';
 import {INK, IVORY, UI} from '../theme';
 
@@ -12,7 +13,7 @@ export const Intro: React.FC = () => {
   const lift = prog(f, 84, 108, inOut);
   const rush = prog(f, 132, 150, (t) => t * t * t);
   const camZ = lerp(14, 9, push) - rush * 8.4;
-  const tc = `00:00:${String(Math.floor(f / 30)).padStart(2, '0')}:${String(f % 30).padStart(2, '0')}`;
+  const tc = `00:00:${String(Math.floor(f / FPS)).padStart(2, '0')}:${String(f % FPS).padStart(2, '0')}`;
   const hud = prog(f, 4, 20);
   return (
     <Bg tone="dark">
@@ -20,8 +21,8 @@ export const Intro: React.FC = () => {
         <Cam z={camZ} fov={40} />
         <color attach="background" args={[INK]} />
         <Field f={f + 200} color={IVORY} speed={0.08 + rush * 1.5} />
-        <group position={[0, lerp(0, 1.25, lift), 0]} rotation={[lerp(0.5, 0, push), lerp(-0.7, 0, push), 0]}>
-          <Mark3D f={f} start={6} scale={lerp(1, 0.55, lift)} />
+        <group position={[0, lerp(0, 1.2, lift), 0]} rotation={[lerp(0.5, 0, push), lerp(-0.7, 0, push), 0]}>
+          <Logo3D f={f} start={4} scale={lerp(0.72, 0.42, lift)} />
         </group>
       </ThreeCanvas>
       <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 170, opacity: 1 - rush}}>

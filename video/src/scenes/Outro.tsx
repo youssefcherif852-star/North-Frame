@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {Bg, Label, Marquee, Pill, Rise, Slam, inOut, lerp, prog, useShake, back} from '../lib';
-import {Field, Mark3D, Ribbon} from '../three-bits';
+import {Field, Logo3D, Ribbon} from '../three-bits';
 import {Cam} from '../three-bits';
 import {DISPLAY, INK, IVORY, UI} from '../theme';
 
@@ -96,7 +96,7 @@ const Lockup: React.FC = () => {
         <color attach="background" args={[INK]} />
         <Field f={f} color={IVORY} speed={0.03} count={900} />
         <group position={[0, 1.35, 0]} rotation={[0, lerp(-1.2, 0, prog(f, 0, 40, inOut)), 0]}>
-          <Mark3D f={f + 40} start={0} scale={0.6} />
+          <Logo3D f={f + 30} start={0} scale={0.42} />
         </group>
       </ThreeCanvas>
       <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 190}}>
@@ -121,7 +121,7 @@ export const Outro: React.FC = () => (
     <Sequence from={120} durationInFrames={60}>
       <Cta />
     </Sequence>
-    <Sequence from={180} durationInFrames={80}>
+    <Sequence from={180} durationInFrames={140}>
       <Lockup />
     </Sequence>
   </AbsoluteFill>

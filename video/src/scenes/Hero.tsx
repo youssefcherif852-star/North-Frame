@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
-import {Bg, Icon, Label, Marquee, Pill, Slam, inOut, lerp, prog, useShake, back} from '../lib';
+import {Bg, Icon, Label, Logo, Marquee, Pill, Slam, inOut, lerp, prog, useShake, back} from '../lib';
 import {Ribbon} from '../three-bits';
 import {Cam} from '../three-bits';
 import {DISPLAY, INK, IVORY, UI} from '../theme';
@@ -124,7 +124,7 @@ export const Hero: React.FC = () => {
           </div>
         </AbsoluteFill>
         <Sticker at={30} x={170} y={150} r={-10} size={150} dark>
-          <span style={{fontFamily: DISPLAY, fontSize: 64}}>NF</span>
+          <Logo width={88} color={IVORY} />
         </Sticker>
         <Sticker at={45} x={1600} y={120} r={9} size={140} round>
           <Icon name="web" size={66} at={50} color={INK} stroke={2} />

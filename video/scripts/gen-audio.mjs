@@ -1,10 +1,11 @@
 // Procedurally generated soundtrack for the North Frame film.
-// 120 BPM, A minor. Kick/hat/bass/pad/risers/impacts, every hit on the grid
+// 192 BPM (one beat = 15 frames at 48 fps) in a half-time feel, A minor. Kick/hat/bass/pad/risers/impacts, every hit on the grid
 // the video cuts on. Writes public/audio/track.wav (44.1 kHz, 16-bit stereo).
 import {writeFileSync} from 'node:fs';
 
-const SR = 44100, FPS = 30, BPM = 120;
-const TOTAL_FRAMES = 1920;
+const SR = 44100, FPS = 48, BPM = 192;
+const K = 120 / BPM; // seconds were written for 120 BPM; scale them to the beat
+const TOTAL_FRAMES = 1980;
 const LEN = Math.ceil((TOTAL_FRAMES / FPS) * SR) + SR; // +1s tail
 const L = new Float32Array(LEN), R = new Float32Array(LEN);
 const beatSec = 60 / BPM;
@@ -86,32 +87,33 @@ const prog = [57, 53, 48, 55];                       // A, F, C, G (bass, MIDI)
 const chords = [[69, 72, 76], [65, 69, 72], [60, 64, 67], [67, 71, 74]];
 
 // Intro: pad swell + rising pulse, riser into the first cut
-pad(0, 5.2, [57, 64, 69, 72], 0.06);
-for (let f = 0; f < 150; f += 15) tick(f, 0.04 + 0.12 * (f / 150));
-riser(150, 2.5, 0.25);
+pad(0, 5.2 * K, [57, 64, 69, 72], 0.06);
+for (let f = 0; f < 150; f += 15) tick(f / FPS, 0.04 + 0.12 * (f / 150));
+riser(150 / FPS, 2.5 * K, 0.25);
 
 for (let bar = 0; bar * 60 + 150 < 1800; bar++) {
   const f0 = 150 + bar * 60, c = bar % 4;
-  pad(f0 / FPS, 2.05, chords[c], 0.045);
+  pad(f0 / FPS, 2.05 * K, chords[c], 0.045);
   const groove = f0 >= 330;
   for (let b = 0; b < 4; b++) {
     const fb = f0 + b * 15;
     if (fb >= 1800) break;
-    kick(fb / FPS, fb >= 990 && fb < 1260 ? 0.95 : 0.85);
-    if (groove) { hat((fb + 7.5) / FPS, 0.1); if (b === 3) hat((fb + 11.25) / FPS, 0.07); }
+    const drive = fb >= 990 && fb < 1260;
+    if (b % 2 === 0 || drive) kick(fb / FPS, drive ? 0.95 : 0.85);
+    if (groove) { hat((fb + 7.5) / FPS, 0.1); if (b % 2 === 1) hat((fb + 11.25) / FPS, 0.06); }
     if (fb >= 570) bass(fb / FPS, beatSec * 0.9, prog[c] - 12 + (b === 2 ? 12 : 0), 0.26);
   }
 }
 cuts.forEach(f => impact(f / FPS, f === 150 || f === 990 || f === 1680 ? 0.6 : 0.32));
-[990, 1680].forEach(f => riser(f / FPS, 1.0, 0.18));
+[990, 1680].forEach(f => riser(f / FPS, 1.0 * K, 0.18));
 // Outro: drums drop at 1800, final chord and logo hit at 1860
-pad(1800 / FPS, 4.2, [57, 64, 69, 72, 76], 0.07);
+pad(1800 / FPS, 4.2 * K + 1.2, [57, 64, 69, 72, 76], 0.07);
 impact(1860 / FPS, 0.5);
 
 // --- master: soft clip + normalise, fade out ---
 let peak = 0;
 for (let i = 0; i < LEN; i++) {
-  const fade = Math.min(1, (LEN - i) / (SR * 1.5));
+  const fade = Math.min(1, (LEN - i) / (SR * 1.2));
   L[i] = Math.tanh(L[i] * 1.1) * fade; R[i] = Math.tanh(R[i] * 1.1) * fade;
   peak = Math.max(peak, Math.abs(L[i]), Math.abs(R[i]));
 }

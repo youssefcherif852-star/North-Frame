@@ -13,7 +13,8 @@ build step, no framework, no package manager.
 index.html               the whole page: markup, <style>, <script>, embedded fonts
 assets/
   fonts/*-latin-ext.woff2  extended-Latin faces, only fetched for glyphs outside Latin-1
-  img/favicon.svg          the North Frame mark
+  img/logo.svg             the North Frame logo: serif NF, ivory on an ink square
+  img/favicon.svg          the logo, cropped tighter for small sizes
   img/og-image.png         1200×630 social card
   marks.py                 single source for the icon marks
 ```
@@ -96,6 +97,13 @@ Wherever an argument could be shown instead of explained, it is also drawn:
 | Ticket to Scale | Two diagrams side by side: three providers pulling toward three destinations, against four parts converging on one node and one arrow out. |
 | Why North Frame | Each principle is a small diagram — a frame holding one dot, a shape and its reflection, an arrow arriving at a target, three arrows travelling together. |
 | Approach | The frame assembles across the four steps: corner marks, then a closed frame, then a filled composition, then an arrow leaving it. |
+
+## The logo
+
+Serif capitals N and F set tight, ivory on an ink square (`assets/img/logo.svg`).
+The letters live once in the page as the `#logo-nf` symbol and are reused for the
+nav tile, the two NF stickers, the founder plate and the footer tile, so they
+always match. On ink grounds the tile is drawn with a 1px ivory outline.
 
 ## The marks
 

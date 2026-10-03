@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
-import {Bg, Label, Rise, inOut, lerp, prog, back} from '../lib';
+import {Bg, Label, Logo, Rise, inOut, lerp, prog, back} from '../lib';
 import {DISPLAY, INK, IVORY, UI} from '../theme';
 
 export const Founder: React.FC = () => {
@@ -45,7 +45,7 @@ export const Founder: React.FC = () => {
             boxSizing: 'border-box',
           }}
         >
-          <div style={{fontFamily: DISPLAY, fontSize: 330, lineHeight: 0.85}}>NF</div>
+          <Logo width={420} color={INK} style={{marginTop: 30}} />
           <div>
             <div style={{fontFamily: DISPLAY, fontSize: 84, lineHeight: 0.85, textTransform: 'uppercase'}}>Youssef Cherif</div>
             <Label style={{marginTop: 18, fontSize: 24}}>Founder</Label>

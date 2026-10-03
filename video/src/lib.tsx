@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
 import {DISPLAY, INK, IVORY, UI} from './theme';
+import {LOGO_BOX, LOGO_D, LOGO_STROKE} from './logo';
 
 export const outExpo = Easing.bezier(0.16, 1, 0.3, 1);
 export const inOut = Easing.bezier(0.65, 0, 0.35, 1);
@@ -282,4 +283,34 @@ export const Mark: React.FC<{size: number; color: string; at: number; stroke?: n
     <Draw d="M6 26V6h20v20" a={at} b={at + 20} stroke={color} strokeWidth={stroke} strokeLinecap="square" />
     <Draw d="M6 26 26 6" a={at + 10} b={at + 26} stroke={color} strokeWidth={stroke} strokeLinecap="square" />
   </svg>
+);
+
+/** The NF letters; colour comes from `color`. Width sets the size. */
+export const Logo: React.FC<{width: number; color: string; style?: React.CSSProperties}> = ({width, color, style}) => (
+  <svg
+    width={width}
+    height={(width * LOGO_BOX.h) / LOGO_BOX.w}
+    viewBox={`${LOGO_BOX.x} ${LOGO_BOX.y} ${LOGO_BOX.w} ${LOGO_BOX.h}`}
+    style={{display: 'block', overflow: 'visible', ...style}}
+  >
+    <path d={LOGO_D} fill={color} stroke={color} strokeWidth={LOGO_STROKE} />
+  </svg>
+);
+
+/** The logo as drawn: ivory letters on an ink square. `outline` frames it on ink grounds. */
+export const LogoTile: React.FC<{size: number; outline?: boolean; style?: React.CSSProperties}> = ({size, outline, style}) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      background: INK,
+      border: outline ? `${Math.max(2, size / 90)}px solid ${IVORY}` : undefined,
+      boxSizing: 'border-box',
+      display: 'grid',
+      placeItems: 'center',
+      ...style,
+    }}
+  >
+    <Logo width={size * 0.57} color={IVORY} />
+  </div>
 );

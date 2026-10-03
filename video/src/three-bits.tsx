@@ -2,6 +2,8 @@ import React, {useMemo} from 'react';
 import * as THREE from 'three';
 import {continueRender, delayRender, staticFile} from 'remotion';
 import {useThree} from '@react-three/fiber';
+import {SVGLoader} from 'three/examples/jsm/loaders/SVGLoader.js';
+import {LOGO_BOX, LOGO_F, LOGO_N} from './logo';
 import {IVORY, INK} from './theme';
 import {lerp, prog, rand, inOut, back} from './lib';
 
@@ -195,4 +197,83 @@ export const Cam: React.FC<{z: number; x?: number; y?: number; fov: number}> = (
   camera.lookAt(x, y, z - 1);
   camera.updateProjectionMatrix();
   return null;
+};
+
+const svgShapes = (d: string) => {
+  const data = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${d}"/></svg>`);
+  return data.paths.flatMap((p) => SVGLoader.createShapes(p));
+};
+
+/** One extruded letter: ivory face, ink sides, ivory edge lines (the site's outlined look). */
+const Letter: React.FC<{d: string}> = ({d}) => {
+  const {geo, edges} = useMemo(() => {
+    const g = new THREE.ExtrudeGeometry(svgShapes(d), {
+      depth: 16,
+      bevelEnabled: true,
+      bevelThickness: 1.2,
+      bevelSize: 0.9, // grows the outline, giving the logo's weight
+      bevelSegments: 1,
+      curveSegments: 10,
+    });
+    // centre on the letters' box, flip SVG's y-down
+    g.translate(-(LOGO_BOX.x + LOGO_BOX.w / 2), -(LOGO_BOX.y + LOGO_BOX.h / 2), -8);
+    g.scale(1, -1, 1);
+    g.computeVertexNormals();
+    return {geo: g, edges: new THREE.EdgesGeometry(g, 25)};
+  }, [d]);
+  return (
+    <group>
+      <mesh geometry={geo}>
+        <meshBasicMaterial attach="material-0" color={IVORY} side={THREE.DoubleSide} />
+        <meshBasicMaterial attach="material-1" color={INK} side={THREE.DoubleSide} />
+      </mesh>
+      <lineSegments geometry={edges}>
+        <lineBasicMaterial color={IVORY} />
+      </lineSegments>
+    </group>
+  );
+};
+
+/**
+ * The NF logo in 3D. The tile's four sides fly in and lock into a square,
+ * then N and F arrive from depth on either side and set together.
+ * Letters are 4 world units wide at scale 1.
+ */
+export const Logo3D: React.FC<{f: number; start: number; scale?: number}> = ({f, start, scale = 1}) => {
+  const k = 4 / LOGO_BOX.w;
+  const half = (272 / 2) * k;
+  const w = 0.05;
+  const sides: {a: [number, number]; b: [number, number]; seed: number; t: number}[] = [
+    {a: [-half, -half], b: [-half, half], seed: 11, t: 0},
+    {a: [-half, half], b: [half, half], seed: 12, t: 4},
+    {a: [half, half], b: [half, -half], seed: 13, t: 8},
+    {a: [half, -half], b: [-half, -half], seed: 14, t: 12},
+  ];
+  const n = prog(f, start + 18, start + 44, back);
+  const fl = prog(f, start + 24, start + 50, back);
+  const settle = prog(f, start + 44, start + 70, inOut);
+  return (
+    <group scale={scale}>
+      {sides.map((p) => {
+        const q = prog(f, start + p.t, start + p.t + 26, back);
+        return (
+          <group
+            key={p.seed}
+            position={[lerp((rand(p.seed) - 0.5) * 18, 0, q), lerp((rand(p.seed + 9) - 0.5) * 12, 0, q), lerp(-26, 0, Math.min(1, q))]}
+            rotation={[lerp(rand(p.seed + 1) * 5, 0, q), lerp(rand(p.seed + 2) * 5, 0, q), lerp(rand(p.seed + 3) * 3, 0, q)]}
+          >
+            <Bar a={p.a} b={p.b} w={w} color={IVORY} />
+          </group>
+        );
+      })}
+      <group scale={[k, k, k]} rotation={[0, lerp(0.5, 0, settle), 0]}>
+        <group position={[lerp(-160, 0, n), lerp(40, 0, n), lerp(-500, 0, Math.min(1, n))]} rotation={[0, lerp(-2.4, 0, n), 0]}>
+          <Letter d={LOGO_N} />
+        </group>
+        <group position={[lerp(160, 0, fl), lerp(-40, 0, fl), lerp(-500, 0, Math.min(1, fl))]} rotation={[0, lerp(2.4, 0, fl), 0]}>
+          <Letter d={LOGO_F} />
+        </group>
+      </group>
+    </group>
+  );
 };

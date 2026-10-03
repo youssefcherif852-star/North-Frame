@@ -1,7 +1,7 @@
 // One source of truth for scene timing. 30 fps, 120 BPM: one beat = 15 frames,
 // one bar = 60 frames. Every cut lands on a beat; the soundtrack generator
 // (scripts/gen-audio.mjs) reads the same numbers.
-export const FPS = 30;
+export const FPS = 48;
 export const BEAT = 15;
 
 export const SCENES = [
@@ -14,7 +14,7 @@ export const SCENES = [
   {id: 'principles', from: 1260, dur: 120},
   {id: 'approach', from: 1380, dur: 180},
   {id: 'founder', from: 1560, dur: 120},
-  {id: 'outro', from: 1680, dur: 240},
+  {id: 'outro', from: 1680, dur: 300},
 ] as const;
 
-export const TOTAL = 1920;
+export const TOTAL = 1980;
