@@ -1,0 +1,27 @@
+{
+  "name": "north-frame-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "North Frame motion graphic, built with Remotion and Three.js",
+  "scripts": {
+    "audio": "node scripts/gen-audio.mjs",
+    "studio": "npm run audio && remotion studio",
+    "render": "npm run audio && remotion render NorthFrame out/north-frame.mp4",
+    "stills": "node scripts/stills.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.1",
+    "@remotion/cli": "^4.0.532",
+    "@remotion/fonts": "^4.0.532",
+    "@remotion/google-fonts": "^4.0.532",
+    "@remotion/three": "^4.0.532",
+    "@remotion/transitions": "^4.0.532",
+    "@types/react": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.532",
+    "three": "^0.186.1",
+    "typescript": "^7.0.2"
+  }
+}
