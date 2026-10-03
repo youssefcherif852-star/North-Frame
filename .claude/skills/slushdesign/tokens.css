@@ -1,0 +1,228 @@
+/* ==========================================================================
+   Slush design system — tokens + base components
+   "Inflatable sticker universe on pastel paper"
+   Fonts: Lateral / Aeonik Pro if licensed, otherwise Anton / Inter (Google Fonts).
+   ========================================================================== */
+
+:root {
+  /* Colours */
+  --color-carbon: #000000;
+  --color-paper-white: #ffffff;
+  --color-sky-wash: #dceeff;
+  --color-concrete-gray: #cccccc;
+  --color-soft-mist: #e9e9e9;
+  --color-electric-blue: #4da2ff;   /* decorative only, never a CTA or link */
+  --color-mint-pop: #55db9c;        /* sticker accent, not a success state */
+  --color-lavender: #e9ccff;
+  --color-ember: #fb4903;
+  --color-sunburst: #ffd731;        /* never behind text */
+  --color-voltage-violet: #5c4ade;
+
+  /* Surfaces */
+  --surface-sky-wash: var(--color-sky-wash);
+  --surface-paper-white: var(--color-paper-white);
+  --surface-concrete-gray: var(--color-concrete-gray);
+  --surface-sticker: var(--color-lavender);
+
+  /* Font families */
+  --font-lateral: 'Lateral', 'Anton', 'Bowlby One', Impact, 'Arial Narrow Bold', sans-serif;
+  --font-aeonik-pro: 'Aeonik Pro', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Weights */
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Type scale */
+  --text-caption: 12px;    --leading-caption: 1.56;    --tracking-caption: -0.01em;
+  --text-body-lg: 15px;    --leading-body-lg: 1.39;    --tracking-body-lg: -0.01em;
+  --text-subheading: 24px; --leading-subheading: 1.2;  --tracking-subheading: -0.01em;
+  --text-heading-sm: 30px; --leading-heading-sm: 1.1;  --tracking-heading-sm: -0.01em;
+  --text-heading: 64px;    --leading-heading: 1;       --tracking-heading: -0.01em;
+  --text-display: 200px;   --leading-display: 0.8;     --tracking-display: 0;
+  --text-display-lg: 640px;--leading-display-lg: 0.75; --tracking-display-lg: 0;
+  --tracking-label: 0.032em;
+
+  /* Fluid display sizes (scale down to 375px wide without overflow) */
+  --display-fluid: clamp(70px, 14vw, 200px);
+  --display-lg-fluid: clamp(64px, 24vw, 640px);
+
+  /* Spacing (4px base) */
+  --spacing-unit: 4px;
+  --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;  --spacing-16: 16px;
+  --spacing-20: 20px; --spacing-24: 24px; --spacing-28: 28px;  --spacing-32: 32px;
+  --spacing-40: 40px; --spacing-44: 44px; --spacing-48: 48px;  --spacing-60: 60px;
+  --spacing-80: 80px; --spacing-128: 128px; --spacing-180: 180px; --spacing-224: 224px;
+
+  /* Layout */
+  --page-max-width: 1440px;
+  --section-gap: 48px;
+  --card-padding: 24px;
+  --element-gap-sm: 4px;
+  --element-gap: 8px;
+  --element-gap-lg: 12px;
+
+  /* Radii */
+  --radius-wallet-icon: 16px;
+  --radius-cards: 20px;
+  --radius-body: 30px;
+  --radius-cards-elevated: 40px;
+  --radius-pill: 1600px;
+  --radius-nav: var(--radius-pill);
+  --radius-buttons: var(--radius-pill);
+  --radius-pills: var(--radius-pill);
+
+  /* Lines */
+  --outline: 1px solid var(--color-carbon);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--color-paper-white);
+  color: var(--color-carbon);
+  font-family: var(--font-aeonik-pro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body-lg);
+  letter-spacing: var(--tracking-body-lg);
+  font-feature-settings: "ss01" on, "tnum";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+:focus-visible { outline: 2px solid var(--color-carbon); outline-offset: 3px; }
+
+/* ---------- Sections (full-bleed colour bands) ---------- */
+.slush-section { position: relative; overflow: hidden; padding: var(--spacing-80) var(--spacing-24); }
+.slush-section--sky   { background: var(--surface-sky-wash); }
+.slush-section--paper { background: var(--surface-paper-white); }
+.slush-section--gray  { background: var(--surface-concrete-gray); }
+.slush-container { max-width: var(--page-max-width); margin: 0 auto; position: relative; z-index: 2; }
+/* Content sits above ribbons; the display block is the only thing ribbons may cross */
+.slush-container > :not(.slush-sticker) { position: relative; z-index: 2; }
+
+/* ---------- Type ---------- */
+.slush-display {
+  font-family: var(--font-lateral);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--display-fluid);
+  line-height: var(--leading-display);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+.slush-display--lg { font-size: var(--display-lg-fluid); line-height: var(--leading-display-lg); }
+.slush-heading { font-weight: 700; font-size: clamp(36px, 6vw, var(--text-heading)); line-height: 1; margin: 0; }
+.slush-subheading { font-weight: 700; font-size: var(--text-subheading); line-height: var(--leading-subheading); margin: 0; }
+.slush-tagline { font-weight: 500; font-size: clamp(20px, 3vw, var(--text-subheading)); line-height: var(--leading-subheading); margin: var(--spacing-24) 0 0; }
+.slush-label {
+  font-weight: 700; font-size: var(--text-caption); line-height: 1;
+  letter-spacing: var(--tracking-label); text-transform: uppercase;
+}
+
+/* ---------- Buttons ---------- */
+.slush-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-8);
+  min-height: 44px;
+  padding: 10px 16px;
+  border: var(--outline);
+  border-radius: var(--radius-buttons);
+  font: 700 14px/1 var(--font-aeonik-pro);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.slush-btn--primary { background: var(--color-carbon); color: var(--color-paper-white); }
+.slush-btn--ghost   { background: var(--color-paper-white); color: var(--color-carbon); }
+.slush-btn:hover { transform: translateY(-2px) rotate(-1deg); }
+.slush-btn--ghost:hover { background: var(--color-soft-mist); }
+
+/* ---------- Nav ---------- */
+.slush-nav {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-12);
+  max-width: var(--page-max-width); margin: 0 auto; padding: var(--spacing-16) var(--spacing-24);
+}
+.slush-nav { flex-wrap: wrap; }
+.slush-nav__links { display: flex; gap: var(--element-gap-sm); flex-wrap: wrap; }
+@media (max-width: 599px) {
+  .slush-nav__links { order: 3; width: 100%; justify-content: center; }
+}
+.slush-nav__link {
+  display: inline-flex; align-items: center; padding: 15px 12px;
+  background: var(--color-paper-white); border: var(--outline); border-radius: var(--radius-nav);
+  font: 700 13px/1 var(--font-aeonik-pro); letter-spacing: var(--tracking-label);
+  text-transform: uppercase; color: var(--color-carbon); text-decoration: none;
+}
+.slush-nav__link:hover { background: var(--color-soft-mist); }
+.slush-logo, .slush-icon-btn {
+  display: inline-grid; place-items: center; width: 44px; height: 44px;
+  background: var(--color-paper-white); border: var(--outline); border-radius: var(--radius-pill);
+  font: 800 20px/1 var(--font-lateral); color: var(--color-carbon); text-decoration: none;
+}
+.slush-icon-btn { font: 700 22px/1 var(--font-aeonik-pro); cursor: pointer; }
+
+/* ---------- Marquee ---------- */
+.slush-marquee {
+  background: var(--color-carbon); color: var(--color-paper-white);
+  overflow: hidden; white-space: nowrap; padding: 8px 0;
+}
+.slush-marquee__track { display: inline-flex; gap: var(--spacing-40); animation: slush-marquee 30s linear infinite; }
+.slush-marquee__track span { font: 700 12px/1.4 var(--font-aeonik-pro); letter-spacing: var(--tracking-label); text-transform: uppercase; }
+@keyframes slush-marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Cards ---------- */
+.slush-card {
+  background: var(--color-paper-white); border: var(--outline);
+  border-radius: var(--radius-cards); padding: var(--card-padding);
+}
+.slush-card--elevated { border-radius: var(--radius-cards-elevated); }
+.slush-card--lavender { background: var(--color-lavender); }
+.slush-card--mint     { background: var(--color-mint-pop); }
+.slush-card--blue     { background: var(--color-electric-blue); }
+
+/* QR download card */
+.slush-qr {
+  display: inline-grid; grid-template-columns: auto auto; align-items: stretch;
+  background: var(--color-voltage-violet); border: var(--outline);
+  border-radius: var(--radius-cards); overflow: hidden;
+}
+.slush-qr__code { background: var(--color-paper-white); padding: 8px; border-right: var(--outline); display: grid; place-items: center; }
+.slush-qr__label {
+  display: grid; place-items: center; padding: 0 var(--spacing-24);
+  color: var(--color-paper-white); font: 700 14px/1 var(--font-aeonik-pro);
+  letter-spacing: var(--tracking-label); text-transform: uppercase;
+}
+
+/* ---------- Stickers ---------- */
+.slush-sticker {
+  position: absolute; z-index: 3;
+  border: var(--outline); border-radius: var(--radius-cards);
+  display: grid; place-items: center;
+  font: 800 20px/1 var(--font-lateral);
+}
+.slush-sticker--round { border-radius: var(--radius-pill); }
+.slush-sticker--ember  { background: var(--color-ember); }
+.slush-sticker--sun    { background: var(--color-sunburst); }
+.slush-sticker--violet { background: var(--color-voltage-violet); color: var(--color-paper-white); }
+.slush-sticker--mint   { background: var(--color-mint-pop); }
+.slush-sticker--lav    { background: var(--color-lavender); }
+
+@media (max-width: 599px) {
+  .slush-sticker { scale: .6; }
+  .slush-sticker--hide-sm { display: none; }
+}
+
+/* ---------- Ribbon ---------- */
+.slush-ribbon { position: absolute; z-index: 1; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slush-marquee__track { animation: none; }
+  .slush-btn { transition: none; }
+  .slush-btn:hover { transform: none; }
+}

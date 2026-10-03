@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slush starter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    /* Page-specific placement only — every value comes from tokens.css */
+    .hero { min-height: 90vh; display: grid; place-items: center; text-align: center; }
+    .hero .slush-display { font-size: var(--display-lg-fluid); line-height: var(--leading-display-lg); }
+    .hero__actions { display: flex; gap: var(--spacing-8); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-32); }
+    .ribbon-hero { left: -10%; top: 18%; width: 120%; }
+    .band { display: grid; gap: var(--spacing-48); align-items: end; }
+    @media (min-width: 900px) { .band { grid-template-columns: 1.4fr 1fr; } }
+    .ribbon-band { right: -15%; top: -10%; width: 80%; }
+    .cards { display: grid; gap: var(--spacing-16); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: var(--spacing-48); }
+    .card-num { font: 800 64px/0.8 var(--font-lateral); }
+    footer { background: var(--color-carbon); color: var(--color-paper-white); padding: var(--spacing-48) var(--spacing-24); }
+    footer .slush-display { color: var(--color-paper-white); }
+  </style>
+</head>
+<body>
+
+  <!-- Marquee: duplicate the message group so the -50% loop is seamless -->
+  <div class="slush-marquee" role="note">
+    <div class="slush-marquee__track" aria-hidden="true">
+      <span>New: stickers for everyone</span><span>★</span><span>Fresh drop every week</span><span>★</span>
+      <span>New: stickers for everyone</span><span>★</span><span>Fresh drop every week</span><span>★</span>
+    </div>
+  </div>
+
+  <header class="slush-section--sky">
+    <nav class="slush-nav" aria-label="Main">
+      <a class="slush-logo" href="#" aria-label="Home">S</a>
+      <div class="slush-nav__links">
+        <a class="slush-nav__link" href="#features">Features</a>
+        <a class="slush-nav__link" href="#about">About</a>
+        <a class="slush-nav__link" href="#download">Download</a>
+      </div>
+      <a class="slush-btn slush-btn--primary" href="#">Launch app</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="slush-section slush-section--sky hero">
+      <!-- 3D ribbon: flat fills only, grain via feTurbulence -->
+      <svg class="slush-ribbon ribbon-hero" viewBox="0 0 1200 400" aria-hidden="true">
+        <defs>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="4"/>
+            <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .35 0"/>
+            <feComposite in2="SourceGraphic" operator="in"/>
+            <feBlend in="SourceGraphic" mode="multiply"/>
+          </filter>
+        </defs>
+        <g filter="url(#grain)" fill="none" stroke-linecap="round">
+          <path d="M-40 300 C 200 40, 420 380, 620 200 S 1000 20, 1240 160" stroke="#2f7fe0" stroke-width="130"/>
+          <path d="M-40 290 C 200 30, 420 370, 620 190 S 1000 10, 1240 150" stroke="#4da2ff" stroke-width="110"/>
+          <path d="M-40 270 C 200 10, 420 350, 620 170 S 1000 -10, 1240 130" stroke="#9ccbff" stroke-width="22" opacity=".8"/>
+        </g>
+      </svg>
+
+      <div class="slush-container">
+        <h1 class="slush-display">Slush</h1>
+        <p class="slush-tagline">Your tagline sits right under the display block.</p>
+        <div class="hero__actions">
+          <a class="slush-btn slush-btn--primary" href="#">Launch web app</a>
+          <a class="slush-btn slush-btn--ghost" href="#">Download for Chrome</a>
+        </div>
+
+        <div class="slush-sticker slush-sticker--ember" aria-hidden="true"
+             style="width:84px;height:84px;left:4%;top:-6%;transform:rotate(-10deg)">🚀</div>
+        <div class="slush-sticker slush-sticker--sun slush-sticker--round" aria-hidden="true"
+             style="width:72px;height:72px;right:6%;top:4%;transform:rotate(8deg)">$</div>
+        <div class="slush-sticker slush-sticker--violet slush-sticker--hide-sm" aria-hidden="true"
+             style="width:96px;height:64px;right:12%;bottom:22%;border-radius:16px;transform:rotate(-6deg)">W</div>
+      </div>
+    </section>
+
+    <!-- Secondary band -->
+    <section id="features" class="slush-section slush-section--gray">
+      <svg class="slush-ribbon ribbon-band" viewBox="0 0 800 300" aria-hidden="true">
+        <g filter="url(#grain)" fill="none" stroke-linecap="round">
+          <path d="M20 260 C 220 -40, 520 320, 780 60" stroke="#2f7fe0" stroke-width="100"/>
+          <path d="M20 250 C 220 -50, 520 310, 780 50" stroke="#4da2ff" stroke-width="84"/>
+        </g>
+      </svg>
+      <div class="slush-container band">
+        <div style="position:relative">
+          <h2 class="slush-display" style="line-height:.76">All things<br>sticker</h2>
+          <div class="slush-sticker slush-sticker--mint slush-sticker--round" aria-hidden="true"
+               style="width:64px;height:64px;left:-12px;bottom:-20px;transform:rotate(-12deg)">✓</div>
+        </div>
+        <div id="download">
+          <p class="slush-subheading">Scan to get the app.</p>
+          <div class="slush-qr" style="margin-top:var(--spacing-16)">
+            <div class="slush-qr__code">
+              <svg width="96" height="96" viewBox="0 0 7 7" aria-label="QR code placeholder" shape-rendering="crispEdges">
+                <path d="M0 0h3v3H0zM4 0h3v3H4zM0 4h3v3H0zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM4 4h1v1H4zM6 4h1v1H6zM5 5h1v1H5zM4 6h1v1H4zM6 6h1v1H6z" fill="#000" fill-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="slush-qr__label">Download</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slush-container cards">
+        <article class="slush-card slush-card--lavender"><div class="card-num">01</div><p class="slush-subheading" style="margin-top:12px">Lavender card</p><p>Body copy in Aeonik Pro 500.</p></article>
+        <article class="slush-card slush-card--mint slush-card--elevated"><div class="card-num">02</div><p class="slush-subheading" style="margin-top:12px">Mint card</p><p>Cards: 20–40px radius, 1px black outline, no shadow.</p></article>
+        <article class="slush-card"><div class="card-num">03</div><p class="slush-subheading" style="margin-top:12px">Paper card</p><p>Mix several sticker colours per screen.</p></article>
+      </div>
+    </section>
+
+    <section id="about" class="slush-section slush-section--paper">
+      <div class="slush-container">
+        <h2 class="slush-heading">Large supporting headline at 64px.</h2>
+        <p class="slush-tagline" style="max-width:40ch">Sections are defined by colour bands alone — no dividers, no shadows, no gradients.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="slush-container">
+      <p class="slush-display" aria-hidden="true">Slush</p>
+      <p class="slush-label" style="margin-top:var(--spacing-24)">© 2026 — Built with the Slush design system</p>
+    </div>
+  </footer>
+</body>
+</html>
