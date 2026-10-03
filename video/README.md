@@ -14,11 +14,15 @@ npm run stills -- 60 250 1100   # review stills → out/st/
 
 `npm run audio` (run automatically by `studio` and `render`) writes the soundtrack,
 `public/audio/track.wav`, from `scripts/gen-audio.mjs`. It is generated, not
-committed: a 192 BPM procedural track, half-time feel, whose impacts land on the cuts.
+committed: bright nu-disco in D major at 96 BPM — four-on-the-floor kick, claps,
+16th hats, an octave-bouncing bass, sidechained supersaw chords, a plucked arpeggio
+and a lead hook with echo and reverb. It drops at the hero, the website fly-through
+and the final chorus, and ends on a held chord with the logo. One beat is 30
+frames, so every cut lands on a beat.
 
 ## Timeline
 
-Every cut lands on a beat (one beat = 15 frames, one bar = 60). The animation is
+Every cut lands on a beat of the music (one beat = 30 frames at 96 BPM). The animation is
 timed in frames and plays at 48fps, so the whole piece runs 1.6× the speed it was
 designed at without dropping a frame; change `FPS` in `src/timeline.ts` (and in
 `scripts/gen-audio.mjs`) to retime it. The scenes are listed in
