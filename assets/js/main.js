@@ -3,9 +3,7 @@
 (function () {
   'use strict';
 
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---- 1. Sticky nav state + scroll progress ---------------------- */
+  /* ---- 1. Sticky nav state -------------------------------------- */
   var nav = document.querySelector('[data-nav]');
   var lastStuck = null;
 
@@ -28,6 +26,8 @@
       // hiding the scrollbar would shift the page; reserve exactly its width
       var sbw = window.innerWidth - document.documentElement.clientWidth;
       document.documentElement.style.setProperty('--sbw', Math.max(0, sbw) + 'px');
+      // the marquee can sit above the nav, so start the overlay at the nav's real edge
+      document.documentElement.style.setProperty('--menu-top', Math.round(nav.getBoundingClientRect().bottom) + 'px');
     }
     toggle.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
@@ -69,72 +69,13 @@
   if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
   else if (desktop.addListener) desktop.addListener(onBreakpoint);
 
-  /* ---- 3. Reveals ------------------------------------------------
-     Two kinds: .reveal fades up, .mask slides display type out of a clipped
-     box. Both are driven by one observer and one stagger rule. */
-  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal, .mask'));
-
-  function showAll() { reveals.forEach(function (el) { el.classList.add('is-in'); }); }
-
-  if (reduced || !('IntersectionObserver' in window)) {
-    showAll();
-  } else {
-    // Siblings sharing a parent arrive as a set, unless the markup sets its own
-    // order (the hero is choreographed by hand).
-    var groups = new Map();
-    reveals.forEach(function (el) {
-      if (el.style.getPropertyValue('--i')) return;
-      var parent = el.parentElement;
-      var n = groups.get(parent) || 0;
-      if (n) el.style.setProperty('--i', String(Math.min(n, 5)));
-      groups.set(parent, n + 1);
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
-        io.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-
-    // Hold the first frame until the display face is ready, so the opening
-    // reveal never animates in the fallback font and then reflow mid-motion.
-    var start = function () { reveals.forEach(function (el) { io.observe(el); }); };
-    var fonts = document.fonts && document.fonts.ready;
-    if (fonts && typeof Promise !== 'undefined') {
-      var armed = false;
-      var once = function () { if (!armed) { armed = true; start(); } };
-      fonts.then(once);
-      setTimeout(once, 600);   // never wait on a font that failed to load
-    } else {
-      start();
-    }
-  }
-
-  /* ---- 4. Approach progress rule --------------------------------- */
-  var approach = document.querySelector('[data-approach]');
-  var steps = approach && approach.querySelector('.steps');
-
-  function progress() {
-    if (!steps || reduced) return;
-    var r = steps.getBoundingClientRect();
-    var vh = window.innerHeight;
-    // 0 when the list's top reaches 80% of the viewport, 1 when its bottom passes 55%.
-    var start = vh * 0.8;
-    var end = vh * 0.55;
-    var p = (start - r.top) / Math.max(r.height - (start - end), 1);
-    steps.style.setProperty('--progress', String(Math.min(1, Math.max(0, p))));
-  }
-
-  /* ---- 5. One rAF-throttled scroll handler ----------------------- */
+  /* ---- 3. One rAF-throttled scroll handler ----------------------- */
   var queued = false;
   function onScroll() {
     if (queued) return;
     queued = true;
     requestAnimationFrame(function () {
       navState();
-      progress();
       queued = false;
     });
   }
@@ -142,9 +83,8 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   navState();
-  progress();
 
-  /* ---- 6. Footer year -------------------------------------------- */
+  /* ---- 4. Footer year -------------------------------------------- */
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());
 })();

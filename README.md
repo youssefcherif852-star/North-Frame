@@ -9,16 +9,16 @@ script. No build step, no framework, no package manager.
 ```
 index.html
 assets/
-  css/style.css      design system + all layout
-  js/main.js         nav, mobile menu, scroll reveals, progress rule
-  fonts/*.woff2      Inter + Inter Tight, self-hosted
+  css/style.css      Slush design system + all layout
+  js/main.js         sticky nav state, mobile menu, footer year
+  fonts/*.woff2      Anton + Inter, self-hosted
+  marks.py           single source for the icon marks
   img/favicon.svg    the North Frame mark
   img/og-image.png   1200×630 social card
 ```
 
-First load is about 150 KB: 23 KB HTML, 30 KB CSS, 4 KB JS, 93 KB fonts. The
-`latin-ext` font files (another 175 KB on disk) are only fetched if a glyph
-outside Latin-1 actually appears, which `unicode-range` decides per page.
+Fonts are split by `unicode-range`: the `latin-ext` files are only fetched if a
+glyph outside Latin-1 actually appears on the page.
 
 ## Running it
 
@@ -35,55 +35,46 @@ nothing to build; publish the repository root as-is.
 
 ## Design system
 
-Two colours, and opacity for everything else.
+The site uses the **Slush** sticker-book system (the `/slushdesign` skill in
+`.claude/skills/slushdesign/`): pastel paper, crushed display type, black
+hand-cut outlines, pill controls and a shared sticker palette.
 
 | Token | Value | Role |
 | --- | --- | --- |
-| `--ink` | `#0F0F0F` | Text, dark sections, primary buttons |
-| `--ivory` | `#FAF8F5` | Page ground, inverted text |
+| `--color-carbon` | `#000000` | Text, 1px outlines, primary buttons, marquee, footer |
+| `--color-paper-white` | `#ffffff` | Cards, ghost buttons, tags |
+| `--color-sky-wash` | `#dceeff` | Hero, Ticket, About bands; nav |
+| `--color-concrete-gray` | `#cccccc` | Services and Approach bands |
+| `--color-electric-blue` | `#4da2ff` | The 3D ribbons only — never a link or button |
+| `--color-mint-pop` / `--color-lavender` / `--color-sunburst` / `--color-ember` | | Sticker, chip and card fills |
+| `--color-voltage-violet` | `#5c4ade` | Ticket to Scale card, founder plate |
 
-Hierarchy comes from opacity steps, hairline rules, and type scale — not from
-accent colours. Dark sections and the footer re-declare `--bg` / `--fg` /
-`--fg-soft` / `--fg-faint` / `--fg-decor` / `--rule`, so every component inside
-them inverts without a duplicated rule.
+Rules the stylesheet keeps:
 
-Above 62rem two hairlines run the full height of the page, half a gutter outside
-the content column — the frame the brand is named for, and the grid every section
-is measured against. They live inside each section rather than in one fixed
-overlay, so they pick up that section's own rule colour; the ten blocks
-(hero, eight sections, footer) are contiguous to the pixel, so the lines are
-unbroken.
+- Sections are full-bleed colour bands (sky → white → gray); no dividers, no
+  shadows, no gradients anywhere.
+- Buttons, nav links, tags and chips are pills; cards use a 24–40px radius. Every
+  interactive element and card has a 1px black outline.
+- The primary action is black with white text; the secondary is white with a black
+  outline. White text only appears on black or violet.
+- Stickers (brand marks in coloured circles and squares) sit rotated and
+  overlapping the display type, never grid-aligned. All are `aria-hidden`.
+- The ribbons are inline SVG: three flat strokes along one path (shade, body,
+  highlight) roughened by one shared `feTurbulence` filter.
 
-Type: **Inter Tight** for display (tight tracking, editorial), **Inter** for body
-and labels — both self-hosted as variable woff2, so there is no third-party
-request in the critical path and no layout shift from a late webfont. Every size
-is a `clamp()` in `:root`, so the scale is fluid rather than stepped at
-breakpoints. Arrows are drawn, not typed: Inter's Latin subsets have no U+2192, so
-a `→` in text would silently render in a fallback face.
+Type: **Anton** for display (a free stand-in for Lateral 800), uppercase, at
+`line-height: 0.85` — the ceiling of the system's 0.75–0.85 range, because Anton's
+capitals run taller than Lateral's and lines collide below that. **Inter** (a
+stand-in for Aeonik Pro) for everything else: 500 for body, 700 for headings and
+controls, `0.032em` tracking on uppercase labels. Both are self-hosted woff2, so
+there is no third-party request. Every display size is a `clamp()`, so headlines
+wrap rather than overflow at phone width.
 
 ## Motion
 
-Two reveal primitives, one observer, one rAF-throttled scroll handler.
-
-- `.mask` slides display type out of a clipped box. Every heading on the page uses
-  it. Below 48rem headings wrap to several visual lines, where sliding a two-line
-  slab reads worse than a fade — so the mask becomes a fade at that width instead.
-- `.reveal` is a 14px fade-up for everything else, staggered by `--i` across
-  siblings.
-- The hero is choreographed by hand (`--i` 0→5: label, both headline lines,
-  buttons, lede, rail) and held until `document.fonts.ready`, with a 600ms
-  timeout, so the opening reveal never animates in the fallback face and reflow
-  mid-motion.
-- The four hero brackets scale outward from their own corners as the page opens —
-  the brand mark, performed once.
-- Micro-interactions are fast (.22–.42s) and reveals are slow (.8s) on
-  `cubic-bezier(.16, 1, .3, 1)`. That contrast is the point.
-- Hover: nav labels swap on a masked vertical slide, button arrows leave to the
-  right as their twin arrives from the left, filled buttons wipe to their inverse,
-  service rows answer by darkening their own hairline rather than filling with grey.
-
-All of it is disabled under `prefers-reduced-motion`, and the page is fully legible
-with JavaScript off (reveal states only apply under `html.js`).
+Deliberately little. The black marquee strip loops; buttons lift and tilt a degree
+on hover; service cards tilt and turn lavender. Nothing reveals on scroll. Under
+`prefers-reduced-motion` the marquee stops and hover transforms are off.
 
 ## Drawn, not written
 
@@ -112,8 +103,8 @@ Eight marks, drawn as one system rather than collected as a set. The rules:
   17–18.5 units on its dominant axis.
 - **One hairline.** Every shape carries `vector-effect="non-scaling-stroke"` as an
   *attribute*, which survives into `<use>` shadow content where a CSS rule cannot
-  reach. So a single `stroke-width: 1.25` paints the same hairline at 24px and at
-  44px, matching the page's own 1px rules. Measured from pixels, not assumed.
+  reach. So a single `stroke-width: 1.5` paints the same line at 24px and at
+  56px, matching the page's black outlines. Measured from pixels, not assumed.
 - **The brand in the marks.** The three discipline marks are built from the
   wordmark's own frame-and-diagonal: Websites is a framed page cut by the
   diagonal, Paid Growth is that diagonal ascending to an arrowhead, and Social
@@ -153,41 +144,14 @@ argument survives with images or sight unavailable.
 
 ## Accessibility
 
-Single `h1`, ordered heading levels, a skip link, visible `:focus-visible` rings,
-`aria-expanded` on the menu toggle, Escape to close, and no interactive target
-under 32px.
-
-The opacity ladder is split by role, because the obvious shortcut fails WCAG:
-`--fg-faint` is the lightest tone allowed for small text (4.5:1 or better) and
-`--fg-decor` is for display sizes only (3:1 or better). Every text node was
-checked against its real rendered background at 375 / 390 / 430 / 768 / 1024 /
-1440 / 1920 px — no contrast failures, no horizontal overflow, no console errors.
+Single `h1`, ordered heading levels, a skip link, visible `:focus-visible` rings
+(white inside the dark areas), `aria-expanded` on the menu toggle, Escape to close,
+and no interactive target under 44px. Black on every pastel passes WCAG AA; white
+text sits only on black (21:1) and violet (6:1).
 
 ## Verified
 
-Driven in real Chromium, not eyeballed. At 320 / 360 / 375 / 390 / 414 / 430 / 600
-/ 768 / 834 / 1024 / 1280 / 1440 / 1680 / 1920 / 2560px:
-
-- no element crosses the viewport edge
-- no text node fails WCAG AA against its **real rendered** background
-- no mask still clips its line after revealing
-- nothing is left unrevealed after a full scroll
-- no console error, page error, or failed request
-- every in-page anchor lands clear of the fixed nav
-- no undefined CSS custom property, no rule for markup that no longer exists,
-  no duplicate `id`
-
-Plus: the mobile menu opens, locks scroll without shifting the page, closes on
-Escape and on link tap and returns focus; `prefers-reduced-motion` leaves every
-element visible and un-animated; with JavaScript disabled the whole page renders.
-
-Bugs this caught and fixed, rather than shipped:
-
-| Symptom | Cause |
-| --- | --- |
-| Icon set read as a generic icon pack, not part of this site | marks drawn at wildly different optical sizes — 18×8 next to 9×17.5 — with freehand curves the rest of the page never uses |
-| Service row arrows rendered as solid black triangles | an `<svg>` with no `fill`/`stroke` set |
-| An ivory stripe down the right edge of every dark section | `scrollbar-gutter: stable` reserved 15px the full-bleed sections never painted into |
-| The primary button dissolved into the page on hover | inverting a filled button that had no border |
-| The nav's bottom border looked half-broken | a scroll-progress hairline overwriting part of it (removed — it read as a utility bar) |
-| Three icon `color` declarations silently inherited | `var(--fg)` had been dropped as "unused", making them invalid at computed-value time |
+Rendered in real Chromium at 375 / 768 / 1000 / 1440 / 1920px: no horizontal
+overflow, no console errors or failed requests, both self-hosted fonts load, the
+mobile menu opens below the nav, closes on link tap and on Escape, and the desktop
+nav fits from 992px up.
