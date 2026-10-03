@@ -26,7 +26,8 @@ const Framed: React.FC<{
     </mesh>
     <mesh>
       <planeGeometry args={[w, h]} />
-      {tex ? <meshBasicMaterial map={tex} toneMapped={false} /> : <meshBasicMaterial color={INK} />}
+      {/* keyed so the shader is rebuilt once the texture arrives */}
+      {tex ? <meshBasicMaterial key={tex.uuid} map={tex} toneMapped={false} /> : <meshBasicMaterial key="empty" color={INK} />}
     </mesh>
   </group>
 );

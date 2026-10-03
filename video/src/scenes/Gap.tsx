@@ -9,7 +9,7 @@ const Flash: React.FC<{tone: Tone; word: string; idx: number}> = ({tone, word, i
   return (
     <Bg tone={tone}>
       <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', transform: `scale(${z})`}}>
-        <div style={{fontFamily: DISPLAY, fontSize: 290, lineHeight: 0.85, textTransform: 'uppercase', whiteSpace: 'nowrap'}}>
+        <div style={{fontFamily: DISPLAY, fontSize: 250, lineHeight: 0.85, textTransform: 'uppercase', whiteSpace: 'nowrap'}}>
           Great {word}
         </div>
       </AbsoluteFill>
