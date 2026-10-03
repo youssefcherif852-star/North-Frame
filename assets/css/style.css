@@ -146,7 +146,6 @@ em { font-style: normal; }
   border-radius: 1px;
 }
 .btn:focus-visible { outline-offset: 3px; }
-.inds__tile:focus-visible { outline-offset: -3px; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
@@ -835,38 +834,6 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
   .principle:first-child { padding-left: 0; }
 }
 
-/* ---------- 12. Industries ---------- */
-.inds {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-}
-.inds__tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(.875rem, 2.5vw, 1.25rem);
-  text-align: center;
-  background: var(--bg);
-  padding: clamp(1.5rem, 4vw, 2.25rem) .75rem;
-  font-size: var(--t-small);
-  color: var(--fg-soft);
-  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
-}
-.inds__icon {
-  --s: 38;
-  color: var(--fg-soft);
-  transition: color var(--fast) var(--ease), transform var(--mid) var(--ease-out);
-}
-.inds__tile:hover { background: var(--ivory); color: var(--ink); }
-.inds__tile:hover .inds__icon { color: var(--ink); transform: translateY(-3px); }
-@media (min-width: 30rem) { .inds { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 48rem) { .inds { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 75rem) { .inds { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-
 /* ---------- 13. Approach ---------- */
 .steps { position: relative; }
 .steps::before,
@@ -1080,8 +1047,6 @@ body.is-locked .nav { padding-right: var(--sbw, 0px); }
 
 @media (hover: none) {
   .svc__item:hover { border-bottom-color: var(--rule); }
-  .inds__tile:hover { background: var(--bg); color: var(--fg-soft); }
-  .inds__tile:hover .inds__icon { color: var(--fg-soft); transform: none; }
   .btn:hover::after { transform: translateX(-100.5%); }
   .btn:hover { color: var(--btn-fg); }
 }

@@ -96,18 +96,17 @@ Wherever an argument could be shown instead of explained, it is also drawn:
 | Services | A monoline mark per discipline — a browser frame with the brand diagonal, a post grid, a rising line. |
 | Ticket to Scale | Two diagrams side by side: three providers pulling toward three destinations, against four parts converging on one node and one arrow out. |
 | Why North Frame | Each principle is a small diagram — a frame holding one dot, a shape and its reflection, an arrow arriving at a target, three arrows travelling together. |
-| Industries | Twelve hospitality pictograms on a hairline grid. Each tile inverts on hover. |
 | Approach | The frame assembles across the four steps: corner marks, then a closed frame, then a filled composition, then an arrow leaving it. |
 
 ## The marks
 
-Twenty marks, drawn as one system rather than collected as a set. The rules:
+Eight marks, drawn as one system rather than collected as a set. The rules:
 
 - **One vocabulary.** Horizontal and vertical rules, 45° diagonals, exact circles
   and true circular arcs. Nothing freehand. The same geometry the page is built
   from.
 - **One optical box.** Every mark is drawn inside an 18-unit box on a 24-unit grid
-  and centred on (12,12), so a grid of twelve reads as a system instead of a set
+  and centred on (12,12), so a row of four reads as a system instead of a set
   of drawings at different sizes. This is checked, not eyeballed — the audit
   fails a mark that drifts off centre by more than 0.75 units or falls outside
   17–18.5 units on its dominant axis.
@@ -133,11 +132,10 @@ argument survives with images or sight unavailable.
 2. The gap — the two panels
 3. Services — Websites / Social Strategy / Paid Growth
 4. The Ticket to Scale — three providers vs. one system
-5. Why North Frame — Clarity, Positioning, Conversion, Direction
-6. Industries — twelve hospitality tiles (nav "Work" points here)
-7. Approach — Discover, Frame, Build, Grow
-8. About — founder
-9. Final CTA + footer
+5. Why North Frame — Clarity, Positioning, Conversion, Direction (nav "Work" points here)
+6. Approach — Discover, Frame, Build, Grow
+7. About — founder
+8. Final CTA + footer
 
 ## Before going live
 
