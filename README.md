@@ -3,22 +3,29 @@
 The official website for **North Frame** — a digital growth partner for hospitality
 businesses. Founded by Youssef Cherif.
 
-A single-page, dependency-free static site: semantic HTML, one stylesheet, one small
-script. No build step, no framework, no package manager.
+A single-page, dependency-free static site. **`index.html` is self-contained**: the
+stylesheet, the script and the two Latin font faces (Anton, Inter) are embedded in
+it, so the page renders fully designed wherever the file is opened — served from a
+host, opened from disk, previewed in an app, or sent on its own as one file. No
+build step, no framework, no package manager.
 
 ```
-index.html
+index.html               the whole page: markup, <style>, <script>, embedded fonts
 assets/
-  css/style.css      Slush design system + all layout
-  js/main.js         sticky nav state, mobile menu, footer year
-  fonts/*.woff2      Anton + Inter, self-hosted
-  marks.py           single source for the icon marks
-  img/favicon.svg    the North Frame mark
-  img/og-image.png   1200×630 social card
+  fonts/*-latin-ext.woff2  extended-Latin faces, only fetched for glyphs outside Latin-1
+  img/favicon.svg          the North Frame mark
+  img/og-image.png         1200×630 social card
+  marks.py                 single source for the icon marks
 ```
 
-Fonts are split by `unicode-range`: the `latin-ext` files are only fetched if a
-glyph outside Latin-1 actually appears on the page.
+Why embedded: the page used to load `assets/css/style.css` by relative path, so
+any copy of `index.html` opened without its `assets/` folder beside it (a
+download, an attachment, a file preview) lost every style and showed raw HTML.
+Embedding removes that dependency. The optional files above degrade quietly: no
+favicon, no share image, or a system fallback for a rare accented glyph.
+
+Edit styles in the `<style>` block and behaviour in the `<script>` block at the
+end of `<body>`.
 
 ## Running it
 
