@@ -91,7 +91,7 @@ export const Approach: React.FC = () => {
             {STEPS[i].line}
           </div>
         </div>
-        <div style={{position: 'absolute', left: 1000, bottom: 110, display: 'flex', gap: 14}}>
+        <div style={{position: 'absolute', left: 1000, bottom: 200, display: 'flex', gap: 14}}>
           {STEPS.map((s, j) => (
             <div
               key={s.w}

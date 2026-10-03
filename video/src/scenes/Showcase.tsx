@@ -120,7 +120,7 @@ const Devices: React.FC = () => {
           </group>
         </group>
       </ThreeCanvas>
-      <AbsoluteFill style={{padding: 70, justifyContent: 'flex-end'}}>
+      <AbsoluteFill style={{padding: '70px 70px 210px', justifyContent: 'flex-end'}}>
         <Rise at={10} size={130}>
           One page.
         </Rise>

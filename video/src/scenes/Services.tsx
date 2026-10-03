@@ -48,7 +48,7 @@ export const Services: React.FC = () => {
                 left: 100 + i * 590,
                 top: 360 + float,
                 width: 540,
-                height: 600,
+                height: 530,
                 borderRadius: 40,
                 border: `3px solid ${INK}`,
                 background: dark ? INK : IVORY,

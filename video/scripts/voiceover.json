@@ -1,0 +1,108 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "lines": [
+    {
+      "id": "v01",
+      "at": 0.45,
+      "max": 2.6,
+      "text": "This is North Frame."
+    },
+    {
+      "id": "v02",
+      "at": 3.3,
+      "max": 3.5,
+      "text": "A digital growth partner for hospitality businesses."
+    },
+    {
+      "id": "v03",
+      "at": 6.9,
+      "max": 2.6,
+      "text": "Great food. Great spaces. Great service."
+    },
+    {
+      "id": "v04",
+      "at": 9.55,
+      "max": 1.8,
+      "text": "Online, it doesn't show."
+    },
+    {
+      "id": "v05",
+      "at": 11.1,
+      "max": 1.15,
+      "text": "We close that gap."
+    },
+    {
+      "id": "v06",
+      "at": 12.3,
+      "max": 3.95,
+      "text": "Websites, social strategy and paid growth, designed around your business."
+    },
+    {
+      "id": "v07",
+      "at": 16.35,
+      "max": 2.95,
+      "text": "The Ticket to Scale brings it all into one growth system."
+    },
+    {
+      "id": "v08",
+      "at": 19.4,
+      "max": 2.3,
+      "text": "One direction. One system. One partner."
+    },
+    {
+      "id": "v09",
+      "at": 21.8,
+      "max": 4.3,
+      "text": "Every page is built with care, and made to work on every screen."
+    },
+    {
+      "id": "v10",
+      "at": 26.35,
+      "max": 2.45,
+      "text": "Clarity. Positioning. Conversion. Direction."
+    },
+    {
+      "id": "v11",
+      "at": 28.85,
+      "max": 0.9,
+      "text": "Discover."
+    },
+    {
+      "id": "v12",
+      "at": 29.78,
+      "max": 0.9,
+      "text": "Frame."
+    },
+    {
+      "id": "v13",
+      "at": 30.72,
+      "max": 0.9,
+      "text": "Build."
+    },
+    {
+      "id": "v14",
+      "at": 31.66,
+      "max": 0.85,
+      "text": "Grow."
+    },
+    {
+      "id": "v15",
+      "at": 32.6,
+      "max": 2.35,
+      "text": "Founded by Youssef Cherif."
+    },
+    {
+      "id": "v16",
+      "at": 35.1,
+      "max": 3.5,
+      "text": "Your business has a direction. Let's frame it properly."
+    },
+    {
+      "id": "v17",
+      "at": 38.9,
+      "max": 2.3,
+      "text": "North Frame. Start a conversation."
+    }
+  ]
+}

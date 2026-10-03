@@ -66,7 +66,7 @@ const Cta: React.FC = () => {
       <div style={{position: 'absolute', left: -200, right: -200, top: 160, transform: 'rotate(-6deg)'}}>
         <Marquee tone="dark" speed={10} size={40} />
       </div>
-      <div style={{position: 'absolute', left: -200, right: -200, bottom: 160, transform: 'rotate(5deg)'}}>
+      <div style={{position: 'absolute', left: -200, right: -200, bottom: 250, transform: 'rotate(5deg)'}}>
         <Marquee tone="light" speed={-8} size={40} items={['Websites', 'Social strategy', 'Paid growth', 'One partner', 'One direction']} />
       </div>
       <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>

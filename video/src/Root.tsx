@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Composition, Sequence, staticFile} from 'remotion';
+import {AbsoluteFill, Audio, Composition, Sequence, interpolate, staticFile} from 'remotion';
 import './theme';
 import {RevealIn, Reveal} from './lib';
 import {SCENES, TOTAL, FPS} from './timeline';
@@ -13,6 +13,7 @@ import {Principles} from './scenes/Principles';
 import {Approach} from './scenes/Approach';
 import {Founder} from './scenes/Founder';
 import {Outro} from './scenes/Outro';
+import {Captions, VOICE_LINES} from './Captions';
 
 const MAP: Record<string, {C: React.FC; reveal: Reveal}> = {
   intro: {C: Intro, reveal: 'cut'},
@@ -29,6 +30,17 @@ const MAP: Record<string, {C: React.FC; reveal: Reveal}> = {
 
 const OVERLAP = 14;
 
+/** Music sits under the voice: ducked while a line is spoken, eased in and out. */
+const musicVolume = (f: number) => {
+  const t = f / FPS;
+  let d = 0;
+  for (const l of VOICE_LINES) {
+    const a = l.at - 0.15, b = l.at + l.dur + 0.1;
+    d = Math.max(d, interpolate(t, [a - 0.2, a, b, b + 0.35], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  }
+  return 0.62 - 0.38 * d;
+};
+
 const NorthFrame: React.FC = () => (
   <AbsoluteFill style={{background: '#0F0F0F'}}>
     {SCENES.map((s) => {
@@ -42,7 +54,13 @@ const NorthFrame: React.FC = () => (
         </Sequence>
       );
     })}
-    <Audio src={staticFile('audio/track.wav')} />
+    <Audio src={staticFile('audio/track.wav')} volume={musicVolume} />
+    {VOICE_LINES.map((l) => (
+      <Sequence key={l.id} from={Math.round(l.at * FPS)} name={`voice ${l.id}`}>
+        <Audio src={staticFile(`voice/${l.id}.wav`)} volume={1} />
+      </Sequence>
+    ))}
+    <Captions />
   </AbsoluteFill>
 );
 
