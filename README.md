@@ -3,22 +3,30 @@
 The official website for **North Frame** — a digital growth partner for hospitality
 businesses. Founded by Youssef Cherif.
 
-A single-page, dependency-free static site: semantic HTML, one stylesheet, one small
-script. No build step, no framework, no package manager.
+A single-page, dependency-free static site. **`index.html` is self-contained**: the
+stylesheet, the script and the two Latin font faces (Anton, Inter) are embedded in
+it, so the page renders fully designed wherever the file is opened — served from a
+host, opened from disk, previewed in an app, or sent on its own as one file. No
+build step, no framework, no package manager.
 
 ```
-index.html
+index.html               the whole page: markup, <style>, <script>, embedded fonts
 assets/
-  css/style.css      design system + all layout
-  js/main.js         nav, mobile menu, scroll reveals, progress rule
-  fonts/*.woff2      Inter + Inter Tight, self-hosted
-  img/favicon.svg    the North Frame mark
-  img/og-image.png   1200×630 social card
+  fonts/*-latin-ext.woff2  extended-Latin faces, only fetched for glyphs outside Latin-1
+  img/logo.svg             the North Frame logo: serif NF, ivory on an ink square
+  img/favicon.svg          the logo, cropped tighter for small sizes
+  img/og-image.png         1200×630 social card
+  marks.py                 single source for the icon marks
 ```
 
-First load is about 150 KB: 23 KB HTML, 30 KB CSS, 4 KB JS, 93 KB fonts. The
-`latin-ext` font files (another 175 KB on disk) are only fetched if a glyph
-outside Latin-1 actually appears, which `unicode-range` decides per page.
+Why embedded: the page used to load `assets/css/style.css` by relative path, so
+any copy of `index.html` opened without its `assets/` folder beside it (a
+download, an attachment, a file preview) lost every style and showed raw HTML.
+Embedding removes that dependency. The optional files above degrade quietly: no
+favicon, no share image, or a system fallback for a rare accented glyph.
+
+Edit styles in the `<style>` block and behaviour in the `<script>` block at the
+end of `<body>`.
 
 ## Running it
 
@@ -35,86 +43,85 @@ nothing to build; publish the repository root as-is.
 
 ## Design system
 
-Two colours, and opacity for everything else.
+The layout follows the **Slush** sticker-book system (the `/slushdesign` skill in
+`.claude/skills/slushdesign/`): crushed display type, pill controls, outlined
+cards, stickers, ribbons and a marquee. The colour is the brand's own pair, and
+nothing else:
 
-| Token | Value | Role |
-| --- | --- | --- |
-| `--ink` | `#0F0F0F` | Text, dark sections, primary buttons |
-| `--ivory` | `#FAF8F5` | Page ground, inverted text |
+| Token | Value |
+| --- | --- |
+| `--ink` | `#0F0F0F` |
+| `--ivory` | `#FAF8F5` |
 
-Hierarchy comes from opacity steps, hairline rules, and type scale — not from
-accent colours. Dark sections and the footer re-declare `--bg` / `--fg` /
-`--fg-soft` / `--fg-faint` / `--fg-decor` / `--rule`, so every component inside
-them inverts without a duplicated rule.
+No tints, no opacity steps, no third colour — checked by reading every computed
+colour on the rendered page, which returns exactly these two.
 
-Above 62rem two hairlines run the full height of the page, half a gutter outside
-the content column — the frame the brand is named for, and the grid every section
-is measured against. They live inside each section rather than in one fixed
-overlay, so they pick up that section's own rule colour; the ten blocks
-(hero, eight sections, footer) are contiguous to the pixel, so the lines are
-unbroken.
+Every component paints with `--bg` / `--fg`, and two classes swap them:
+`.is-dark` (ink ground, ivory ink) and `.is-light`. A dark band, a filled card, a
+filled sticker or chip are the same component in the other context, so nothing is
+styled twice.
 
-Type: **Inter Tight** for display (tight tracking, editorial), **Inter** for body
-and labels — both self-hosted as variable woff2, so there is no third-party
-request in the critical path and no layout shift from a late webfont. Every size
-is a `clamp()` in `:root`, so the scale is fluid rather than stepped at
-breakpoints. Arrows are drawn, not typed: Inter's Latin subsets have no U+2192, so
-a `→` in text would silently render in a fallback face.
+- Bands alternate ivory and ink down the page; the Ticket to Scale is an ink card
+  on an ivory band, and the footer closes in ink.
+- Buttons, nav links, tags and chips are pills; cards use a 24–40px radius; every
+  card and control has a 1px outline in the opposite colour.
+- Stickers are the brand marks in ink or ivory circles and squares, rotated and
+  overlapping the display type. All are `aria-hidden`.
+- Ribbons are hollow outlined tubes (an outer stroke, an inner stroke in the band
+  colour, one highlight line), so display type can cross them. Body text that
+  crosses a ribbon sits on a small plate of the band colour.
+
+Type: **Anton** for display (a free stand-in for Lateral 800), uppercase, at
+`line-height: 0.85` — the ceiling of the system's 0.75–0.85 range, because Anton's
+capitals run taller than Lateral's and lines collide below that. **Inter** for
+everything else: 500 for body, 700 for headings and controls, `0.032em` tracking
+on uppercase labels. Both are self-hosted woff2. Every display size is a
+`clamp()`, so headlines wrap rather than overflow at phone width.
 
 ## Motion
 
-Two reveal primitives, one observer, one rAF-throttled scroll handler.
-
-- `.mask` slides display type out of a clipped box. Every heading on the page uses
-  it. Below 48rem headings wrap to several visual lines, where sliding a two-line
-  slab reads worse than a fade — so the mask becomes a fade at that width instead.
-- `.reveal` is a 14px fade-up for everything else, staggered by `--i` across
-  siblings.
-- The hero is choreographed by hand (`--i` 0→5: label, both headline lines,
-  buttons, lede, rail) and held until `document.fonts.ready`, with a 600ms
-  timeout, so the opening reveal never animates in the fallback face and reflow
-  mid-motion.
-- The four hero brackets scale outward from their own corners as the page opens —
-  the brand mark, performed once.
-- Micro-interactions are fast (.22–.42s) and reveals are slow (.8s) on
-  `cubic-bezier(.16, 1, .3, 1)`. That contrast is the point.
-- Hover: nav labels swap on a masked vertical slide, button arrows leave to the
-  right as their twin arrives from the left, filled buttons wipe to their inverse,
-  service rows answer by darkening their own hairline rather than filling with grey.
-
-All of it is disabled under `prefers-reduced-motion`, and the page is fully legible
-with JavaScript off (reveal states only apply under `html.js`).
+Deliberately little. The ink marquee strip loops; buttons lift and tilt a degree
+on hover; ghost buttons and nav links invert; service cards tilt and turn ink.
+Nothing reveals on scroll. Under `prefers-reduced-motion` the marquee stops and
+hover transforms are off.
 
 ## Drawn, not written
 
-The page carries 357 words of visible copy. Wherever an argument could be shown
-instead of explained, it is drawn:
+Copy follows the brief's wording, kept to one short paragraph per section at most.
+Wherever an argument could be shown instead of explained, it is also drawn:
 
 | Section | What the drawing does |
 | --- | --- |
-| The gap | Two panels: the same cup, plate and glass composed on one table line, then cropped, tilted and half-loaded on a phone. The argument, without the paragraph. |
+| The gap | Two panels: the same cup, plate and glass composed on one table line, then cropped, tilted and half-loaded on a phone. It sits under the *great food, great spaces, great service* line and makes the same point visually. |
 | Services | A monoline mark per discipline — a browser frame with the brand diagonal, a post grid, a rising line. |
 | Ticket to Scale | Two diagrams side by side: three providers pulling toward three destinations, against four parts converging on one node and one arrow out. |
 | Why North Frame | Each principle is a small diagram — a frame holding one dot, a shape and its reflection, an arrow arriving at a target, three arrows travelling together. |
-| Industries | Twelve hospitality pictograms on a hairline grid. Each tile inverts on hover. |
 | Approach | The frame assembles across the four steps: corner marks, then a closed frame, then a filled composition, then an arrow leaving it. |
+
+## The logo
+
+Serif capitals N and F set tight, ivory on an ink square (`assets/img/logo.svg`),
+traced to vector from the master artwork.
+The letters live once in the page as the `#logo-nf` symbol and are reused for the
+nav tile, the two NF stickers, the founder plate and the footer tile, so they
+always match. On ink grounds the tile is drawn with a 1px ivory outline.
 
 ## The marks
 
-Twenty marks, drawn as one system rather than collected as a set. The rules:
+Eight marks, drawn as one system rather than collected as a set. The rules:
 
 - **One vocabulary.** Horizontal and vertical rules, 45° diagonals, exact circles
   and true circular arcs. Nothing freehand. The same geometry the page is built
   from.
 - **One optical box.** Every mark is drawn inside an 18-unit box on a 24-unit grid
-  and centred on (12,12), so a grid of twelve reads as a system instead of a set
+  and centred on (12,12), so a row of four reads as a system instead of a set
   of drawings at different sizes. This is checked, not eyeballed — the audit
   fails a mark that drifts off centre by more than 0.75 units or falls outside
   17–18.5 units on its dominant axis.
 - **One hairline.** Every shape carries `vector-effect="non-scaling-stroke"` as an
   *attribute*, which survives into `<use>` shadow content where a CSS rule cannot
-  reach. So a single `stroke-width: 1.25` paints the same hairline at 24px and at
-  44px, matching the page's own 1px rules. Measured from pixels, not assumed.
+  reach. So a single `stroke-width: 1.5` paints the same line at 24px and at
+  56px, matching the page's black outlines. Measured from pixels, not assumed.
 - **The brand in the marks.** The three discipline marks are built from the
   wordmark's own frame-and-diagonal: Websites is a framed page cut by the
   diagonal, Paid Growth is that diagonal ascending to an arrowhead, and Social
@@ -133,11 +140,10 @@ argument survives with images or sight unavailable.
 2. The gap — the two panels
 3. Services — Websites / Social Strategy / Paid Growth
 4. The Ticket to Scale — three providers vs. one system
-5. Why North Frame — Clarity, Positioning, Conversion, Direction
-6. Industries — twelve hospitality tiles (nav "Work" points here)
-7. Approach — Discover, Frame, Build, Grow
-8. About — founder
-9. Final CTA + footer
+5. Why North Frame — Clarity, Positioning, Conversion, Direction (nav "Work" points here)
+6. Approach — Discover, Frame, Build, Grow
+7. About — founder
+8. Final CTA + footer
 
 ## Before going live
 
@@ -155,41 +161,14 @@ argument survives with images or sight unavailable.
 
 ## Accessibility
 
-Single `h1`, ordered heading levels, a skip link, visible `:focus-visible` rings,
-`aria-expanded` on the menu toggle, Escape to close, and no interactive target
-under 32px.
-
-The opacity ladder is split by role, because the obvious shortcut fails WCAG:
-`--fg-faint` is the lightest tone allowed for small text (4.5:1 or better) and
-`--fg-decor` is for display sizes only (3:1 or better). Every text node was
-checked against its real rendered background at 375 / 390 / 430 / 768 / 1024 /
-1440 / 1920 px — no contrast failures, no horizontal overflow, no console errors.
+Single `h1`, ordered heading levels, a skip link, visible `:focus-visible` rings
+(ivory inside the dark areas), `aria-expanded` on the menu toggle, Escape to close,
+and no interactive target under 44px. Ink on ivory and ivory on ink are 18:1, well past
+WCAG AAA.
 
 ## Verified
 
-Driven in real Chromium, not eyeballed. At 320 / 360 / 375 / 390 / 414 / 430 / 600
-/ 768 / 834 / 1024 / 1280 / 1440 / 1680 / 1920 / 2560px:
-
-- no element crosses the viewport edge
-- no text node fails WCAG AA against its **real rendered** background
-- no mask still clips its line after revealing
-- nothing is left unrevealed after a full scroll
-- no console error, page error, or failed request
-- every in-page anchor lands clear of the fixed nav
-- no undefined CSS custom property, no rule for markup that no longer exists,
-  no duplicate `id`
-
-Plus: the mobile menu opens, locks scroll without shifting the page, closes on
-Escape and on link tap and returns focus; `prefers-reduced-motion` leaves every
-element visible and un-animated; with JavaScript disabled the whole page renders.
-
-Bugs this caught and fixed, rather than shipped:
-
-| Symptom | Cause |
-| --- | --- |
-| Icon set read as a generic icon pack, not part of this site | marks drawn at wildly different optical sizes — 18×8 next to 9×17.5 — with freehand curves the rest of the page never uses |
-| Service row arrows rendered as solid black triangles | an `<svg>` with no `fill`/`stroke` set |
-| An ivory stripe down the right edge of every dark section | `scrollbar-gutter: stable` reserved 15px the full-bleed sections never painted into |
-| The primary button dissolved into the page on hover | inverting a filled button that had no border |
-| The nav's bottom border looked half-broken | a scroll-progress hairline overwriting part of it (removed — it read as a utility bar) |
-| Three icon `color` declarations silently inherited | `var(--fg)` had been dropped as "unused", making them invalid at computed-value time |
+Rendered in real Chromium at 375 / 768 / 1000 / 1440 / 1920px: no horizontal
+overflow, no console errors or failed requests, both self-hosted fonts load, the
+mobile menu opens below the nav, closes on link tap and on Escape, and the desktop
+nav fits from 992px up.
