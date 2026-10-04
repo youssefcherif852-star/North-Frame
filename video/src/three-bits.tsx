@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {continueRender, delayRender, staticFile} from 'remotion';
 import {useThree} from '@react-three/fiber';
 import {SVGLoader} from 'three/examples/jsm/loaders/SVGLoader.js';
-import {LOGO_BOX, LOGO_F, LOGO_N} from './logo';
+import {LOGO_BOX, LOGO_D, LOGO_SPLIT_X} from './logo';
 import {IVORY, INK} from './theme';
 import {lerp, prog, rand, inOut, back} from './lib';
 
@@ -204,23 +204,48 @@ const svgShapes = (d: string) => {
   return data.paths.flatMap((p) => SVGLoader.createShapes(p));
 };
 
-/** One extruded letter: ivory face, ink sides, ivory edge lines (the site's outlined look). */
-const Letter: React.FC<{d: string}> = ({d}) => {
+/** Keeps the triangles whose centre lies on one side of x = split, preserving material groups. */
+const splitGeometry = (src: THREE.BufferGeometry, split: number, left: boolean) => {
+  const pos = src.getAttribute('position') as THREE.BufferAttribute;
+  const out: number[] = [];
+  const groups: {start: number; count: number; materialIndex: number}[] = [];
+  const srcGroups = src.groups.length ? src.groups : [{start: 0, count: pos.count, materialIndex: 0}];
+  for (const gr of srcGroups) {
+    const start = out.length / 3;
+    for (let i = gr.start; i < gr.start + gr.count; i += 3) {
+      const cx = (pos.getX(i) + pos.getX(i + 1) + pos.getX(i + 2)) / 3;
+      if (cx < split === left) for (let k = 0; k < 3; k++) out.push(pos.getX(i + k), pos.getY(i + k), pos.getZ(i + k));
+    }
+    groups.push({start, count: out.length / 3 - start, materialIndex: gr.materialIndex ?? 0});
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
+  groups.forEach((gr) => g.addGroup(gr.start, gr.count, gr.materialIndex));
+  return g;
+};
+
+/**
+ * One letter of the extruded logo: ivory face, ink sides, ivory edge lines (the
+ * site's outlined look). The traced letters are a single shape, so N keeps the
+ * triangles left of the split and F the rest.
+ */
+const Letter: React.FC<{side: 'N' | 'F'}> = ({side}) => {
   const {geo, edges} = useMemo(() => {
-    const g = new THREE.ExtrudeGeometry(svgShapes(d), {
+    const whole = new THREE.ExtrudeGeometry(svgShapes(LOGO_D), {
       depth: 16,
       bevelEnabled: true,
       bevelThickness: 1.2,
-      bevelSize: 0.9, // grows the outline, giving the logo's weight
+      bevelSize: 0.15,
       bevelSegments: 1,
       curveSegments: 10,
     });
+    const g = splitGeometry(whole.toNonIndexed(), LOGO_SPLIT_X, side === 'N');
     // centre on the letters' box, flip SVG's y-down
     g.translate(-(LOGO_BOX.x + LOGO_BOX.w / 2), -(LOGO_BOX.y + LOGO_BOX.h / 2), -8);
     g.scale(1, -1, 1);
     g.computeVertexNormals();
     return {geo: g, edges: new THREE.EdgesGeometry(g, 25)};
-  }, [d]);
+  }, [side]);
   return (
     <group>
       <mesh geometry={geo}>
@@ -268,10 +293,10 @@ export const Logo3D: React.FC<{f: number; start: number; scale?: number}> = ({f,
       })}
       <group scale={[k, k, k]} rotation={[0, lerp(0.5, 0, settle), 0]}>
         <group position={[lerp(-160, 0, n), lerp(40, 0, n), lerp(-500, 0, Math.min(1, n))]} rotation={[0, lerp(-2.4, 0, n), 0]}>
-          <Letter d={LOGO_N} />
+          <Letter side="N" />
         </group>
         <group position={[lerp(160, 0, fl), lerp(-40, 0, fl), lerp(-500, 0, Math.min(1, fl))]} rotation={[0, lerp(2.4, 0, fl), 0]}>
-          <Letter d={LOGO_F} />
+          <Letter side="F" />
         </group>
       </group>
     </group>

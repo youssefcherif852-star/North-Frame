@@ -100,7 +100,8 @@ Wherever an argument could be shown instead of explained, it is also drawn:
 
 ## The logo
 
-Serif capitals N and F set tight, ivory on an ink square (`assets/img/logo.svg`).
+Serif capitals N and F set tight, ivory on an ink square (`assets/img/logo.svg`),
+traced to vector from the master artwork.
 The letters live once in the page as the `#logo-nf` symbol and are reused for the
 nav tile, the two NF stickers, the founder plate and the footer tile, so they
 always match. On ink grounds the tile is drawn with a 1px ivory outline.
