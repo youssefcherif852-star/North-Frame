@@ -317,12 +317,13 @@ img, svg { display: block; max-width: 100%; }
   min-height: var(--nav-h);
 }
 .nav__brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-/* The logo tile: ivory letters on an ink square, square corners as drawn. */
+/* The logo tile: ivory letters on an ink square with softly rounded corners (14% of its size). */
 .nav__mark {
   display: inline-grid; place-items: center;
   width: 44px; height: 44px;
   background: var(--fg); color: var(--bg);
   border: 1px solid var(--fg);
+  border-radius: 6px;
 }
 .logo-nf { display: block; width: 100%; aspect-ratio: 156 / 88; height: auto; }
 .nav__mark .logo-nf { width: 28px; }
@@ -577,6 +578,7 @@ img, svg { display: block; max-width: 100%; }
   width: 96px; height: 96px; margin-bottom: 24px;
   background: var(--bg); color: var(--fg);
   border: 1px solid var(--fg);
+  border-radius: 13px;
 }
 .footer__logo .logo-nf { width: 62px; }
 .footer__tag { font-size: var(--text-subheading); font-weight: 700; line-height: 1.2; max-width: 20ch; }
