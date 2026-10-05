@@ -147,9 +147,8 @@ argument survives with images or sight unavailable.
 
 ## Before going live
 
-- [ ] **Contact address.** `hello@northframe.co` is a placeholder. Replace both
-      `mailto:` links (final CTA + footer) with the real address, or swap them for a
-      form endpoint.
+- [x] **Contact address.** Both `mailto:` links (final CTA + footer) go to
+      `northframe75@gmail.com`.
 - [ ] **Canonical URL.** Add `<link rel="canonical">` and switch the two `og:image`
       / `twitter:image` paths to absolute URLs once the domain is live — most
       scrapers will not resolve a relative path.
