@@ -1,0 +1,16 @@
+{
+  "name": "north-frame-hq-tests",
+  "private": true,
+  "description": "Local checks for the North Frame HQ dashboard: a mock Claude runtime and scripted browser scenarios.",
+  "scripts": {
+    "lint": "node lint-templates.js",
+    "test": "node lint-templates.js && node run.js"
+  },
+  "devDependencies": {
+    "acorn": "8.12.1",
+    "acorn-walk": "8.3.3",
+    "htm": "3.1.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
